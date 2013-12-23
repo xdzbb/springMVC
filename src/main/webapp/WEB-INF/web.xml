@@ -10,14 +10,21 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <!-- Spring 配置 start -->  
-	<servlet>     
-     <servlet-name>spring</servlet-name>     
-     	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>     
-     	<load-on-startup>1</load-on-startup>     
-	 </servlet>     
-	 <servlet-mapping>     
-	     <servlet-name>spring</servlet-name>  <!-- 这里在配成spring,下边也要写一个名为spring-servlet.xml的文件，主要用来配置它的controller -->   
-	     <url-pattern>*.jhtml</url-pattern>     
-	 </servlet-mapping>
+	<servlet>
+        <servlet-name>springMVC</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:src/main/resources/hib-config.xml,classpath:src/main/resources/springmvc-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>springMVC</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
 	 <!-- Spring 配置 end -->
 </web-app>

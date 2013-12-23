@@ -9,4 +9,15 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <!-- Spring 配置 start -->  
+	<servlet>     
+     <servlet-name>spring</servlet-name>     
+     	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>     
+     	<load-on-startup>1</load-on-startup>     
+	 </servlet>     
+	 <servlet-mapping>     
+	     <servlet-name>spring</servlet-name>  <!-- 这里在配成spring,下边也要写一个名为spring-servlet.xml的文件，主要用来配置它的controller -->   
+	     <url-pattern>*.jhtml</url-pattern>     
+	 </servlet-mapping>
+	 <!-- Spring 配置 end -->
 </web-app>

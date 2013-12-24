@@ -16,7 +16,7 @@ public interface IBaseDao<T> {
 		 * @param pager
 		 * @return
 		 */
-		public List<T> findByDetach(DetachedCriteria dc,Pager pager);
+		public List<?> findByDetach(DetachedCriteria dc,Pager pager);
 		
 		/**
 		 * 查询总记录个数
@@ -34,8 +34,15 @@ public interface IBaseDao<T> {
 		// 根据id获取对象
 		public abstract Object getObjectById(T clazz, Integer id);
 		
+		// 插入对象
+		public abstract int saveObject(T object);
+
+		// 插入或修改对象
+		public abstract int updateObject(T object);
+
+		
 		// 查询 返回列表 num个(如果num为null返回所有)
-		public abstract List<T> getList(String hql, Integer num)
+		public abstract List<?> getList(String hql, Integer num)
 				throws DataAccessException;
 
 		// 查询数量
@@ -45,18 +52,13 @@ public interface IBaseDao<T> {
 		public abstract Integer getMax(String hql) throws DataAccessException;
 	
 		// 分页查询
-		public abstract List<T> getPagerData(String hql, Integer curPage,
+		public abstract List<?> getPagerData(String hql, Integer curPage,
 				Integer countPerPage);
 
 		// 查询对象
 		public abstract Object findObject(String hql) throws DataAccessException;
 
-		// 插入对象
-		public abstract int saveObject(T object);
-
-		// 插入或修改对象
-		public abstract int updateObject(T object);
-
+	
 		//执行sql语句进行更新和删除
 		public abstract int executeSQLUpdate(String sql) throws DataAccessException;
 
@@ -65,11 +67,11 @@ public interface IBaseDao<T> {
 				throws DataAccessException;
 
 		// 查询 返回列表 num个(如果num为null返回所有)
-		public abstract List<T> SQLQueryList(String sql, Integer num, T clazz)
+		public abstract List<?> SQLQueryList(String sql, Integer num, Class<?> clazz)
 				throws DataAccessException;
 
 		// 查询 返回列表 分页
-		public abstract List<T> SQLQueryPagerList(String sql, Integer curPage,
-				Integer countPerPage, T clazz) throws DataAccessException;
+		public abstract List<?> SQLQueryPagerList(String sql, Integer curPage,
+				Integer countPerPage, Class<?> clazz) throws DataAccessException;
 
 }

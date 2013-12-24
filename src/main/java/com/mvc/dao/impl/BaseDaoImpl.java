@@ -52,29 +52,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 		return ht.get(clazz.getClass(), id);
 	}
 
-	// 查询 返回列表 num个(如果num为null返回所有)
-	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<T> SQLQueryPagerList(final String sql, final Integer curPage,
-			final Integer countPerPage,final T clazz)
-			throws DataAccessException {
-		return (List<T>) ht.execute(new HibernateCallback() {
-			public Object doInHibernate(Session session)
-					throws HibernateException {
-				try {
-					SQLQuery query = session.createSQLQuery(sql);
-					query.addEntity(clazz.getClass());
-					query.setFirstResult(countPerPage * (curPage - 1));
-					query.setMaxResults(countPerPage);
-					List<T> result = query.list();
-					return result;
-				} catch (RuntimeException e) {					
-					e.printStackTrace();
-					return null;
-				}
-			}
-		});
-	}
+	
 	
 	// 删除或更新
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -97,9 +75,9 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 	// 查询 返回列表 num个(如果num为null返回所有)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public List<T> getList(final String hql, final Integer num)
+	public List<?> getList(final String hql, final Integer num)
 			throws DataAccessException {	
-		return (List<T>) ht.execute(new HibernateCallback() {
+		return (List<?>) ht.execute(new HibernateCallback() {
 			public Object doInHibernate(Session session)
 					throws HibernateException {
 				try {
@@ -163,9 +141,9 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 	// 分页查询
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public List<T> getPagerData(final String hql, final Integer curPage,
+	public List<?> getPagerData(final String hql, final Integer curPage,
 			final Integer countPerPage) {		
-		return (List<T>) ht.execute(new HibernateCallback() {
+		return (List<?>) ht.execute(new HibernateCallback() {
 			public Object doInHibernate(Session session)
 					throws HibernateException {
 				try {
@@ -174,7 +152,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 						query.setFirstResult(countPerPage * (curPage - 1));
 						query.setMaxResults(countPerPage);
 					}
-					List<T> result = query.list();
+					List<?> result = query.list();
 					return result;
 				} catch (RuntimeException e) {						
 					e.printStackTrace();
@@ -207,7 +185,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 	
 
 	// 插入或修改对象
-	public int UpdateObject(Object object) {
+	public int UpdateObject(T object) {
 		try {		
 			ht.saveOrUpdate(object);
 			ht.flush();
@@ -252,9 +230,9 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 	// 查询 返回列表 num个(如果num为null返回所有)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public List<T> SQLQueryList(final String sql, final Integer num,final T clazz)
+	public List<?> SQLQueryList(final String sql, final Integer num,final Class<?> clazz)
 			throws DataAccessException {
-		return (List<T>) ht.execute(new HibernateCallback() {
+		return (List<?>) ht.execute(new HibernateCallback() {
 			public Object doInHibernate(Session session)
 					throws HibernateException {
 				try {
@@ -268,7 +246,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 					 * begin:Name wuqiwei,Date:2013-1-16,Email:1058633117@qq.com
 					 * 配置主页的团购的查询缓存
 					 */
-					query.addEntity(clazz.getClass());
+					query.addEntity(clazz);
 					if (num != null && num.intValue() > 0)
 						query.setMaxResults(num);
 					List<?> result = query.list();
@@ -281,6 +259,29 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 		});
 	}	
 	
+	// 查询 返回列表 num个(如果num为null返回所有)
+	@Override
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<?> SQLQueryPagerList(final String sql, final Integer curPage,
+			final Integer countPerPage,final Class<?> clazz)
+			throws DataAccessException {
+			return (List<?>) ht.execute(new HibernateCallback() {
+			public Object doInHibernate(Session session)
+					throws HibernateException {
+				try {
+					SQLQuery query = session.createSQLQuery(sql);
+					query.addEntity(clazz);
+					query.setFirstResult(countPerPage * (curPage - 1));
+					query.setMaxResults(countPerPage);
+					List<?> result = query.list();
+					return result;
+				} catch (RuntimeException e) {					
+					e.printStackTrace();
+					return null;
+				}
+			}
+		});
+	}
 	//删除对象
 	@Override
 	public int deleteObject(T t) {
@@ -298,7 +299,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 	
 	//查询分页
 	@Override
-	public List<T> findByDetach(DetachedCriteria dc, Pager pager) {
+	public List<?> findByDetach(DetachedCriteria dc, Pager pager) {
 		// TODO Auto-generated method stub
 		return ht.findByCriteria(dc,pager.getCurrentPage()*pager.getPageSize(),pager.getPageSize());
 	}

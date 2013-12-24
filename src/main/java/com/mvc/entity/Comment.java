@@ -2,10 +2,7 @@ package com.mvc.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,10 +14,10 @@ public class Comment implements java.io.Serializable {
 
 	// Fields
 
-	private long id;
-	private Tuser tuser;
-	private long modelid;
+	private Integer id;
+	private Integer modelid;
 	private String model;
+	private Integer userid;
 	private String content;
 	private Integer time;
 
@@ -31,20 +28,20 @@ public class Comment implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Comment(long id, Tuser tuser, long modelid, String content) {
+	public Comment(Integer id, Integer modelid, Integer userid, String content) {
 		this.id = id;
-		this.tuser = tuser;
 		this.modelid = modelid;
+		this.userid = userid;
 		this.content = content;
 	}
 
 	/** full constructor */
-	public Comment(long id, Tuser tuser, long modelid, String model,
+	public Comment(Integer id, Integer modelid, String model, Integer userid,
 			String content, Integer time) {
 		this.id = id;
-		this.tuser = tuser;
 		this.modelid = modelid;
 		this.model = model;
+		this.userid = userid;
 		this.content = content;
 		this.time = time;
 	}
@@ -52,30 +49,20 @@ public class Comment implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
-	public long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userid", nullable = false)
-	public Tuser getTuser() {
-		return this.tuser;
-	}
-
-	public void setTuser(Tuser tuser) {
-		this.tuser = tuser;
-	}
-
 	@Column(name = "modelid", nullable = false)
-	public long getModelid() {
+	public Integer getModelid() {
 		return this.modelid;
 	}
 
-	public void setModelid(long modelid) {
+	public void setModelid(Integer modelid) {
 		this.modelid = modelid;
 	}
 
@@ -86,6 +73,15 @@ public class Comment implements java.io.Serializable {
 
 	public void setModel(String model) {
 		this.model = model;
+	}
+
+	@Column(name = "userid", nullable = false)
+	public Integer getUserid() {
+		return this.userid;
+	}
+
+	public void setUserid(Integer userid) {
+		this.userid = userid;
 	}
 
 	@Column(name = "content", nullable = false, length = 256)

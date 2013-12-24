@@ -1,13 +1,8 @@
 package com.mvc.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,7 +14,7 @@ public class Tuser implements java.io.Serializable {
 
 	// Fields
 
-	private long id;
+	private Integer id;
 	private String nickname;
 	private String username;
 	private String password;
@@ -30,8 +25,6 @@ public class Tuser implements java.io.Serializable {
 	private Integer createtime;
 	private Integer jointime;
 	private Integer status;
-	private Set<Article> articles = new HashSet<Article>(0);
-	private Set<Comment> comments = new HashSet<Comment>(0);
 
 	// Constructors
 
@@ -40,17 +33,16 @@ public class Tuser implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Tuser(long id, String nickname, String password) {
+	public Tuser(Integer id, String nickname, String password) {
 		this.id = id;
 		this.nickname = nickname;
 		this.password = password;
 	}
 
 	/** full constructor */
-	public Tuser(long id, String nickname, String username, String password,
+	public Tuser(Integer id, String nickname, String username, String password,
 			String email, Integer sex, String tel, String image,
-			Integer createtime, Integer jointime, Integer status,
-			Set<Article> articles, Set<Comment> comments) {
+			Integer createtime, Integer jointime, Integer status) {
 		this.id = id;
 		this.nickname = nickname;
 		this.username = username;
@@ -62,18 +54,16 @@ public class Tuser implements java.io.Serializable {
 		this.createtime = createtime;
 		this.jointime = jointime;
 		this.status = status;
-		this.articles = articles;
-		this.comments = comments;
 	}
 
 	// Property accessors
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
-	public long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -165,24 +155,6 @@ public class Tuser implements java.io.Serializable {
 
 	public void setStatus(Integer status) {
 		this.status = status;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tuser")
-	public Set<Article> getArticles() {
-		return this.articles;
-	}
-
-	public void setArticles(Set<Article> articles) {
-		this.articles = articles;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tuser")
-	public Set<Comment> getComments() {
-		return this.comments;
-	}
-
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
 	}
 
 }

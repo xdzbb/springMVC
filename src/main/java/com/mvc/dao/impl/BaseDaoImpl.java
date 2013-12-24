@@ -1,124 +1,54 @@
 package com.mvc.dao.impl;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 
+import java.util.List;
 import javax.annotation.Resource;
 
-import org.hibernate.Query;
+import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+
 import com.mvc.dao.IBaseDao;
 
 @Repository("baseDao")
-public class BaseDaoImpl<T> implements IBaseDao<T> {
+public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {	
+	private HibernateTemplate ht = this.getHibernateTemplate();
 	
 	@Resource
-	private SessionFactory sessionFactory;
-
-	@Override
-	public Serializable save(T o) {
-		return this.sessionFactory.getCurrentSession().save(o);
-	}
-
-	@Override
-	public T get(String hql) {
-		Query q = this.sessionFactory.getCurrentSession().createQuery(hql);
-		List<T> l = q.list();
-		if (l != null && l.size() > 0) {
-			return l.get(0);
-		}
-		return null;
-	}
-
-	@Override
-	public T get(String hql, Map<String, Object> params) {
-		Query q = this.sessionFactory.getCurrentSession().createQuery(hql);
-		if (params != null && !params.isEmpty()) {
-			for (String key : params.keySet()) {
-				q.setParameter(key, params.get(key));
-			}
-		}
-		List<T> l = q.list();
-		if (l != null && l.size() > 0) {
-			return l.get(0);
-		}
-		return null;
-	}
-
-	@Override
-	public void delete(T o) {
-		this.sessionFactory.getCurrentSession().delete(o);
-	}
-
-	@Override
-	public void update(T o) {
-		this.sessionFactory.getCurrentSession().update(o);
-	}
-
-	@Override
-	public void saveOrUpdate(T o) {
-		this.sessionFactory.getCurrentSession().saveOrUpdate(o);
-	}
-
-	@Override
-	public List<T> find(String hql) {
-		Query q = this.sessionFactory.getCurrentSession().createQuery(hql);
-		return q.list();
-	}
-
-	@Override
-	public List<T> find(String hql, Map<String, Object> params) {
-		Query q = this.sessionFactory.getCurrentSession().createQuery(hql);
-		if (params != null && !params.isEmpty()) {
-			for (String key : params.keySet()) {
-				q.setParameter(key, params.get(key));
-			}
-		}
-		return q.list();
-	}
-
-	@Override
-	public List<T> find(String hql, Map<String, Object> params, int page, int rows) {
-		Query q = this.sessionFactory.getCurrentSession().createQuery(hql);
-		if (params != null && !params.isEmpty()) {
-			for (String key : params.keySet()) {
-				q.setParameter(key, params.get(key));
-			}
-		}
-		return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
-	}
-
-	@Override
-	public List<T> find(String hql, int page, int rows) {
-		Query q = this.sessionFactory.getCurrentSession().createQuery(hql);
-		return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
-	}
-
-	@Override
-	public Long count(String hql) {
-		Query q = this.sessionFactory.getCurrentSession().createQuery(hql);
-		return (Long) q.uniqueResult();
-	}
-
-	@Override
-	public Long count(String hql, Map<String, Object> params) {
-		Query q = this.sessionFactory.getCurrentSession().createQuery(hql);
-		if (params != null && !params.isEmpty()) {
-			for (String key : params.keySet()) {
-				q.setParameter(key, params.get(key));
-			}
-		}
-		return (Long) q.uniqueResult();
-	}
+	public void setSessionFactory0(SessionFactory sessionFactory){		
+	  super.setSessionFactory(sessionFactory);		 
+	}	
 	
-	@Override
-	public void test() {
-		// TODO Auto-generated method stub
-		System.err.println("此处调用了DAO方法");
+	// 查询 返回列表 num个(如果num为null返回所有)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<?> SQLQueryPagerList(final String sql, final Integer curPage,
+			final Integer countPerPage,final Class<?> clazz)
+			throws DataAccessException {
+		return (List<?>) ht.execute(new HibernateCallback() {
+			public Object doInHibernate(Session session)
+					throws HibernateException {
+				try {
+					SQLQuery query = session.createSQLQuery(sql);
+					query.addEntity(clazz);
+					query.setFirstResult(countPerPage * (curPage - 1));
+					query.setMaxResults(countPerPage);
+					List<?> result = query.list();
+					return result;
+				} catch (RuntimeException e) {					
+					e.printStackTrace();
+					return null;
+				}
+			}
+		});
 	}
+	// 根据id获取对象
+	public Object getObjectById(Class<?> clazz,Integer id){
+		return ht.get(clazz, id);
+	}	
 }

@@ -20,7 +20,6 @@ public class TuserController{
 		System.out.println(uname+"++++++++++++");
 		System.out.println("此处调用了TuserControllerXXXX");   
 		System.err.println("---------------------------------");
-		userService.test();
 		return "index";
 	}
 	

@@ -1,13 +1,8 @@
 package com.mvc.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,9 +14,8 @@ public class Articletype implements java.io.Serializable {
 
 	// Fields
 
-	private long id;
+	private Integer id;
 	private String typename;
-	private Set<Article> articles = new HashSet<Article>(0);
 
 	// Constructors
 
@@ -29,27 +23,20 @@ public class Articletype implements java.io.Serializable {
 	public Articletype() {
 	}
 
-	/** minimal constructor */
-	public Articletype(long id, String typename) {
-		this.id = id;
-		this.typename = typename;
-	}
-
 	/** full constructor */
-	public Articletype(long id, String typename, Set<Article> articles) {
+	public Articletype(Integer id, String typename) {
 		this.id = id;
 		this.typename = typename;
-		this.articles = articles;
 	}
 
 	// Property accessors
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
-	public long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -60,15 +47,6 @@ public class Articletype implements java.io.Serializable {
 
 	public void setTypename(String typename) {
 		this.typename = typename;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "articletype")
-	public Set<Article> getArticles() {
-		return this.articles;
-	}
-
-	public void setArticles(Set<Article> articles) {
-		this.articles = articles;
 	}
 
 }

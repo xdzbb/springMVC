@@ -12,8 +12,8 @@ import javax.servlet.ServletResponse;
 public class CharacterEncodingFilter implements Filter{
 
 	
-	private String characterEncoding; //编码方式配置在web.xml文件中
-    private boolean enabled;   //是否启用此Filter，配置在web.xml中
+	private String characterEncoding;
+    private boolean enabled;
 	
 	@Override
 	public void destroy() {

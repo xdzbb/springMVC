@@ -2,10 +2,7 @@ package com.mvc.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,9 +14,9 @@ public class Article implements java.io.Serializable {
 
 	// Fields
 
-	private long id;
-	private Articletype articletype;
-	private Tuser tuser;
+	private Integer id;
+	private Integer userid;
+	private Integer typeid;
 	private String keyword;
 	private String title;
 	private String content;
@@ -35,22 +32,22 @@ public class Article implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Article(long id, Articletype articletype, Tuser tuser, String title,
+	public Article(Integer id, Integer userid, Integer typeid, String title,
 			String content) {
 		this.id = id;
-		this.articletype = articletype;
-		this.tuser = tuser;
+		this.userid = userid;
+		this.typeid = typeid;
 		this.title = title;
 		this.content = content;
 	}
 
 	/** full constructor */
-	public Article(long id, Articletype articletype, Tuser tuser,
-			String keyword, String title, String content, Integer createtime,
+	public Article(Integer id, Integer userid, Integer typeid, String keyword,
+			String title, String content, Integer createtime,
 			Integer publictime, Integer status, Integer praisecount) {
 		this.id = id;
-		this.articletype = articletype;
-		this.tuser = tuser;
+		this.userid = userid;
+		this.typeid = typeid;
 		this.keyword = keyword;
 		this.title = title;
 		this.content = content;
@@ -63,32 +60,30 @@ public class Article implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
-	public long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "typeid", nullable = false)
-	public Articletype getArticletype() {
-		return this.articletype;
+	@Column(name = "userid", nullable = false)
+	public Integer getUserid() {
+		return this.userid;
 	}
 
-	public void setArticletype(Articletype articletype) {
-		this.articletype = articletype;
+	public void setUserid(Integer userid) {
+		this.userid = userid;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userid", nullable = false)
-	public Tuser getTuser() {
-		return this.tuser;
+	@Column(name = "typeid", nullable = false)
+	public Integer getTypeid() {
+		return this.typeid;
 	}
 
-	public void setTuser(Tuser tuser) {
-		this.tuser = tuser;
+	public void setTypeid(Integer typeid) {
+		this.typeid = typeid;
 	}
 
 	@Column(name = "keyword", length = 20)

@@ -14,7 +14,7 @@ public class TuserController{
 	
 	@Resource
 	private ITuserService userService;
-	
+
 	@RequestMapping(params="method=reg")
 	public String reg(String uname){
 		System.out.println(uname+"++++++++++++");

@@ -5,36 +5,52 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>springMVC</name>
-  <description/>
+  <description/>  
+   <!-- 依赖软件的版本 -->
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.version>3.1.2.RELEASE</spring.version>
+        <junit.version>4.11-beta-1</junit.version>
+        <log4j.version>1.2.17</log4j.version>
+        <jstl.version>1.2</jstl.version>            
+        <druid.version>0.2.8</druid.version>       
+        <hibernate.version>3.5.0-Final</hibernate.version> 
+        <aspectj.version>1.7</aspectj.version>
+        <commons.lang.version>3.1</commons.lang.version>
+        <servlet.version>2.5</servlet.version>
+        <slf4j.version>1.5.8</slf4j.version>
+        <mysql.version>5.1.21</mysql.version>
+        <fastjson.version>1.1.24</fastjson.version>
+        <servlet.jsp.version>2.2.1-b03</servlet.jsp.version> 
+        <maven.compiler.version>2.3.2</maven.compiler.version>       
+        <maven.resources.version>2.5</maven.resources.version>
   </properties>
   <dependencies>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
-      <version>1.2</version>
+      <version>${jstl.version}</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet.jsp</groupId>
       <artifactId>jsp-api</artifactId>
-      <version>2.2.1-b03</version>
+      <version>${servlet.jsp.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-nop</artifactId>
-      <version>1.5.2</version>
+      <version>${slf4j.version}</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>3.5.0-Final</version>
+      <version>${hibernate.version}</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-annotations</artifactId>
-      <version>3.4.0.GA</version>
+      <version>${hibernate.version}</version>
       <exclusions>
         <exclusion>
           <artifactId>hibernate-commons-annotations</artifactId>
@@ -45,7 +61,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
-      <version>3.4.0.GA</version>
+      <version>${hibernate.version}</version>
       <exclusions>
         <exclusion>
           <artifactId>hibernate-commons-annotations</artifactId>
@@ -56,12 +72,12 @@
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
-      <version>1.1.24</version>
+      <version>${fastjson.version}</version>
     </dependency>
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.21</version>
+      <version>${mysql.version}</version>
     </dependency>
     <dependency>
       <groupId>com.alibaba</groupId>

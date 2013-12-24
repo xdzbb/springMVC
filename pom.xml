@@ -18,7 +18,7 @@
         <aspectj.version>1.7.0</aspectj.version>
         <commons.lang.version>3.1</commons.lang.version>
         <servlet.version>2.5</servlet.version>
-        <slf4j.version>1.5.8</slf4j.version>
+        <slf4j.version>1.6.0</slf4j.version>
         <mysql.version>5.1.21</mysql.version>
         <druid.version>0.2.8</druid.version>
         <cglib.version>2.1</cglib.version>
@@ -30,11 +30,17 @@
         <commons-collections.version>3.1</commons-collections.version>
         <ehcache.version>1.2.3</ehcache.version>
         <dom4j.version>1.6.1</dom4j.version>
+        <commons-fileupload.version>1.3</commons-fileupload.version>
         <maven.compiler.version>2.3.2</maven.compiler.version>       
         <maven.resources.version>2.5</maven.resources.version> 
         <maven.war.version>2.2</maven.war.version>       
   </properties>
   <dependencies>
+  	<dependency>
+	    <groupId>commons-fileupload</groupId>
+	    <artifactId>commons-fileupload</artifactId>
+	    <version>${commons-fileupload.version}</version>
+	</dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
@@ -59,24 +65,12 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-annotations</artifactId>
-      <version>${hibernate.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>hibernate-commons-annotations</artifactId>
-          <groupId>org.hibernate</groupId>
-        </exclusion>
-      </exclusions>
+      <version>${hibernate.version}</version>      
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
-      <version>${hibernate.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>hibernate-commons-annotations</artifactId>
-          <groupId>org.hibernate</groupId>
-        </exclusion>
-      </exclusions>
+      <version>${hibernate.version}</version>     
     </dependency>
     <dependency>
       <groupId>com.alibaba</groupId>
@@ -189,12 +183,7 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>${slf4j.version}</version>
-    </dependency>
+    </dependency>    
     <dependency>
       <groupId>dom4j</groupId>
       <artifactId>dom4j</artifactId>

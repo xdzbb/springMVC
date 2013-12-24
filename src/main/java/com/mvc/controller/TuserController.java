@@ -13,8 +13,8 @@ import com.mvc.service.ITuserService;
 @RequestMapping("/user.do")
 @SessionAttributes({"u","a"})
 public class TuserController{
-
-	@Autowired
+	
+	@Resource
 	private ITuserService userService;
 	
 	@RequestMapping(params="method=reg")

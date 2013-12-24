@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<sql>
+CREATE TABLE `tuser` (
+  `id`  int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID', 
+  `nickname` varchar(64) not null COMMENT '笔名',
+  `username` varchar(64) DEFAULT NULL COMMENT '真实姓名',
+  `password` varchar(20) not NULL COMMENT '密码',
+  `email` varchar(256) DEFAULT NULL COMMENT '邮箱',
+  `sex` int(1) DEFAULT 0 COMMENT '0 表示男,1 表示女',
+  `tel` varchar(20) DEFAULT null COMMENT '电话',
+  `image` varchar(100) DEFAULT null comment '个人照片',
+  `createtime` int DEFAULT NULL comment '申请时间',
+  `jointime` int DEFAULT NULL comment '批准加入时间',
+  `status` int(11) DEFAULT NULL comment '用户状态:0,代表正常 1，代表封禁',
+  PRIMARY KEY (`id`)
+)  ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8
+
+
+CREATE TABLE `article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID', 
+  `userid` int(11) not null COMMENT 'user外建',
+  `typeid` int(11) not null COMMENT '文章分类表',
+  `keyword` varchar(20) NULL COMMENT '文章关键词',
+  `title` varchar(256) not NULL COMMENT '文章标题',
+  `content` text not NULL COMMENT '文章内容',
+  `createtime` int  null COMMENT '文章发布时间',
+  `publictime` int  null comment '通过时间',
+  `status` int(11) DEFAULT NULL comment '0,代表通过 1，代表拒绝',
+  `praisecount` int(11) default null comment '点赞数',
+  PRIMARY KEY (`id`),
+   FOREIGN KEY (`userid`) REFERENCES `tuser`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`typeid`) REFERENCES `articletype`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+   
+)  ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+
+
+CREATE TABLE `articletype` (
+  `id` int(11) AUTO_INCREMENT COMMENT 'ID', 
+  `typename` varchar(256) not null COMMENT '文章类型名',
+  PRIMARY KEY (`id`)
+)  ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+
+insert into `articletype`(`typename`) values('诗歌日记');
+insert into `articletype`(`typename`) values('诗歌日记');
+insert into `articletype`(`typename`) values('诗歌日记');
+
+select * from articletype;
+
+create table `comment` (
+  `id`  int(11) AUTO_INCREMENT COMMENT 'ID', 
+  `modelid`  int(11) not null COMMENT '模块id',
+  `model` varchar(20) null COMMENT '评论模块',
+  `userid`  int(11) not null COMMENT 'user外建',
+  `content` varchar(256) not null COMMENT '评论内容',
+  `time` int  null COMMENT '评论时间',
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`userid`) REFERENCES `tuser`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)  ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+</sql>
+
+
+
+

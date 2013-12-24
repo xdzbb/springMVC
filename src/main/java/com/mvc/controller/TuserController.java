@@ -18,13 +18,7 @@ public class TuserController{
 
 	@RequestMapping(params="method=reg")
 	public String reg(Tuser tuser){
-		System.out.println("此处调用了TuserControllerXXXX");   
-		System.err.println("---------------------------------");
-		Tuser user=userService.isLogin(tuser);
-		if (user!=null) {
-			return "index";
-		}
-		return "index";
+			return "register";
 	}
 	
 }

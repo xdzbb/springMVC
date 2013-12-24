@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.mvc.entity.Tuser;
 import com.mvc.service.ITuserService;
 
 @Controller
@@ -16,10 +17,13 @@ public class TuserController{
 	private ITuserService userService;
 
 	@RequestMapping(params="method=reg")
-	public String reg(String uname){
-		System.out.println(uname+"++++++++++++");
+	public String reg(Tuser tuser){
 		System.out.println("此处调用了TuserControllerXXXX");   
 		System.err.println("---------------------------------");
+		Tuser user=userService.isLogin(tuser);
+		if (user!=null) {
+			return "index";
+		}
 		return "index";
 	}
 	

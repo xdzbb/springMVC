@@ -92,7 +92,23 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 	</aop:config> 
 	<tx:advice id="txAdvice" transaction-manager="txManager" > 
 		<tx:attributes> 
-			<tx:method name="find*"  read-only="true" propagation="NOT_SUPPORTED"  /> 
+			<tx:method name="add*" />
+			<tx:method name="save*" />
+			<tx:method name="update*" />
+			<tx:method name="modify*" />
+			<tx:method name="edit*" />
+			<tx:method name="delete*" />
+			<tx:method name="remove*" />
+			<tx:method name="repair" />
+			<tx:method name="deleteAndRepair" />
+
+			<tx:method name="get*" propagation="SUPPORTS" />
+			<tx:method name="find*" propagation="SUPPORTS" />
+			<tx:method name="load*" propagation="SUPPORTS" />
+			<tx:method name="search*" propagation="SUPPORTS" />
+			<tx:method name="datagrid*" propagation="SUPPORTS" />
+
+			<tx:method name="*" propagation="SUPPORTS" />
 			<!-- get开头的方法不需要在事务中运行 。 
 			有些情况是没有必要使用事务的，比如获取数据。开启事务本身对性能是有一定的影响的--> 
 			<tx:method name="*"/>    <!-- 其他方法在实务中运行 --> 

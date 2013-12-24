@@ -29,5 +29,7 @@ public interface IBaseDao<T> {
 	public Long count(String hql);
 
 	public Long count(String hql, Map<String, Object> params);
+	
+	public void test();
 
 }

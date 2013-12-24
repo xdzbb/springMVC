@@ -1,10 +1,8 @@
 package com.mvc.controller;
 import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.mvc.service.ITuserService;
@@ -19,9 +17,10 @@ public class TuserController{
 	
 	@RequestMapping(params="method=reg")
 	public String reg(String uname){
-		//配置错了
 		System.out.println(uname+"++++++++++++");
-		System.out.println("此处调用了TuserController");   
+		System.out.println("此处调用了TuserControllerXXXX");   
+		System.err.println("---------------------------------");
+		userService.test();
 		return "index";
 	}
 	

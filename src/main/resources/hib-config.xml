@@ -22,7 +22,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 		init-method="init" destroy-method="close">
 		<property name="url" value="jdbc:mysql://192.168.1.200:3306/mvcdb?useUnicode=true&amp;characterEncoding=UTF-8" />
 		<property name="username" value="root" />
-		<property name="password" value="1234" />
+		<property name="password" value="root" />
 
 		<!-- 初始化连接大小 -->
 		<property name="initialSize" value="0" />

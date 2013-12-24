@@ -20,34 +20,23 @@ public class TuserServiceImpl implements ITuserService {
 	private BaseDaoImpl baseDao;
 	
 	@Override
-	public int deleteUser(Tuser user) {
+	public boolean isRegister(Tuser tuser) {
 		// TODO Auto-generated method stub
-		return baseDao.deleteObject(user);
+		Integer resultr=baseDao.saveObject(tuser);
+		if (resultr>0) {
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public Integer findByConut(Tuser tuser) {
+	public Tuser isLogin(Tuser tuser) {
 		// TODO Auto-generated method stub
 		DetachedCriteria dc=DetachedCriteria.forClass(Tuser.class);
-		return baseDao.findByConut(dc);
-	}
-	
-	@Override
-	public List<Tuser> findByDetach(Tuser tuser, Pager pager) {
-		// TODO Auto-generated method stub
-		DetachedCriteria dc=DetachedCriteria.forClass(Tuser.class);
-		return baseDao.findByDetach(dc, pager);
-	}
-	
-	@Override
-	public int saveUser(Tuser user) {
-		// TODO Auto-generated method stub
-		return baseDao.saveObject(user);
-	}
-	
-	@Override
-	public int updateUser(Tuser user) {
-		// TODO Auto-generated method stub
-		return baseDao.saveObject(user);
+		List<Tuser> list= baseDao.findByDetach(dc, null);
+		if (list.size()>0) {
+			return list.get(0);
+		}
+		return null;
 	}
 }

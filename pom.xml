@@ -15,15 +15,24 @@
         <jstl.version>1.2</jstl.version>            
         <druid.version>0.2.8</druid.version>       
         <hibernate.version>3.5.0-Final</hibernate.version> 
-        <aspectj.version>1.7</aspectj.version>
+        <aspectj.version>1.7.0</aspectj.version>
         <commons.lang.version>3.1</commons.lang.version>
         <servlet.version>2.5</servlet.version>
         <slf4j.version>1.5.8</slf4j.version>
         <mysql.version>5.1.21</mysql.version>
+        <druid.version>0.2.8</druid.version>
+        <cglib.version>2.1</cglib.version>
         <fastjson.version>1.1.24</fastjson.version>
+        <javassist.version>3.11.0.GA</javassist.version>
         <servlet.jsp.version>2.2.1-b03</servlet.jsp.version> 
+        <antlr.version>2.7.6</antlr.version>
+        <jta.version>1.1</jta.version>
+        <commons-collections.version>3.1</commons-collections.version>
+        <ehcache.version>1.2.3</ehcache.version>
+        <dom4j.version>1.6.1</dom4j.version>
         <maven.compiler.version>2.3.2</maven.compiler.version>       
-        <maven.resources.version>2.5</maven.resources.version>
+        <maven.resources.version>2.5</maven.resources.version> 
+        <maven.war.version>2.2</maven.war.version>       
   </properties>
   <dependencies>
     <dependency>
@@ -82,128 +91,128 @@
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid</artifactId>
-      <version>0.2.8</version>
+      <version>${druid.version}</version>
     </dependency>
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
-      <version>1.7.0</version>
+      <version>${aspectj.version}</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
+      <version>${servlet.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
+      <version>${log4j.version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11-beta-1</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
-      <version>3.1.2.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>3.1.2.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>3.1.2.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
      <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>3.1.2.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
-      <version>3.1.2.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>3.1.2.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-expression</artifactId>
-      <version>3.1.2.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
-      <version>3.1.2.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>cglib</groupId>
       <artifactId>cglib</artifactId>
-      <version>2.1</version>
+      <version>${cglib.version}</version>
     </dependency>
     <dependency>
       <groupId>javassist</groupId>
       <artifactId>javassist</artifactId>
-      <version>3.11.0.GA</version>
+      <version>${javassist.version}</version>
     </dependency>
     <dependency>
       <groupId>antlr</groupId>
       <artifactId>antlr</artifactId>
-      <version>2.7.6</version>
+      <version>${antlr.version}</version>
     </dependency>
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId>
-      <version>3.1</version>
+      <version>${commons-collections.version}</version>
     </dependency>
     <dependency>
       <groupId>javax.transaction</groupId>
       <artifactId>jta</artifactId>
-      <version>1.1</version>
+      <version>${jta.version}</version>
     </dependency>
     <dependency>
       <groupId>net.sf.ehcache</groupId>
       <artifactId>ehcache</artifactId>
-      <version>1.2.3</version>
+      <version>${ehcache.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.5.8</version>
+      <version>${slf4j.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
-      <version>1.5.8</version>
+      <version>${slf4j.version}</version>
     </dependency>
     <dependency>
       <groupId>dom4j</groupId>
       <artifactId>dom4j</artifactId>
-      <version>1.6.1</version>
+      <version>${dom4j.version}</version>
     </dependency>
   </dependencies>
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>2.5</version>
+        <version>${maven.resources.version}</version>
         <configuration>
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
+        <version>${maven.compiler.version}</version>
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
@@ -211,7 +220,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
-        <version>2.2</version>
+        <version>${maven.war.version}</version>
         <configuration>
           <version>3.0</version>
           <failOnMissingWebXml>false</failOnMissingWebXml>

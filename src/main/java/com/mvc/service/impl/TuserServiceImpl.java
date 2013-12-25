@@ -9,8 +9,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
 import com.mvc.dao.impl.BaseDaoImpl;
-import com.mvc.entity.Articletype;
-import com.mvc.entity.Pager;
 import com.mvc.entity.Tuser;
 import com.mvc.service.ITuserService;
 
@@ -36,9 +34,9 @@ public class TuserServiceImpl implements ITuserService {
 		DetachedCriteria dc=DetachedCriteria.forClass(Tuser.class);
 		dc.add(Restrictions.eq("nickname", tuser.getNickname()));
 		dc.add(Restrictions.eq("password", tuser.getPassword()));
-		List<Tuser> list= baseDao.findByDetach(dc, null);
+		List<?> list= baseDao.findByDetach(dc, null);
 		if (list.size()>0) {
-			return list.get(0);
+			return (Tuser) list.get(0);
 		}
 		return null;
 	}

@@ -1,4 +1,4 @@
-@charset "gb2312";
+@charset "utf-8";
 /* CSS Document */
 @import url("base.css");
 body {
@@ -217,7 +217,7 @@ border-style: none;
 }
 
 
-/* 登录box
+/* �诲�box
 -------------------------------------------------------------------*/
 .red, .red a:link, .red a:visited, a.red:link, a.red:visited {
 color:#FF0000;
@@ -328,6 +328,7 @@ text-decoration:none;
 	line-height:38px;
 	width:116px;
 	font-weight: bold;
+	margin-left: 130px;
 }
 .clear {
 	clear: both;

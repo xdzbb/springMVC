@@ -8,7 +8,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
-import com.mvc.dao.impl.BaseDaoImpl;
+import com.mvc.dao.IBaseDao;
 import com.mvc.entity.Tuser;
 import com.mvc.service.ITuserService;
 
@@ -16,7 +16,7 @@ import com.mvc.service.ITuserService;
 public class TuserServiceImpl implements ITuserService {
 
 	@Resource
-	private BaseDaoImpl<Tuser> baseDao;
+	private IBaseDao<Tuser> baseDao;
 	
 	@Override
 	public boolean isRegister(Tuser tuser) {

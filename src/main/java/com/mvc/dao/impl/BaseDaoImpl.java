@@ -9,6 +9,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -19,17 +20,13 @@ import com.mvc.dao.IBaseDao;
 import com.mvc.entity.Pager;
 
 @Repository("baseDao")
-public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {	
+public class BaseDaoImpl<T> implements IBaseDao<T> {	
 	
 	private final static Integer baseNum=1;//增删该返回的受影响行数
 	
-	private HibernateTemplate ht = this.getHibernateTemplate();
-	
-	@Resource
-	public void setSessionFactory0(SessionFactory sessionFactory){		
-	  super.setSessionFactory(sessionFactory);		 
-	}	
-	
+	@Autowired
+	private HibernateTemplate ht; 
+
 	//保存对象
 	@Override
 	public int saveObject(T t) {

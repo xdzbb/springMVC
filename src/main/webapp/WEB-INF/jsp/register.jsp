@@ -4,21 +4,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>什么网>>会员注册</title>
-<link type="text/css" rel="stylesheet" href="../../css/login.css">
+<link type="text/css" rel="stylesheet" href="resource/css/login.css">
 </link>
 <script type="text/javascript" language="javascript"
-	src="templets/js/j.js">
+	src="resource/js/j.js">
 	
 </script>
 <script type="text/javascript" language="javascript"
-	src="templets/js/base.js">
+	src="resource/js/js/base.js">
 	
 </script>
 <script language="javascript" type="text/javascript"
-	src="templets/js/CheckPassStrength.js">
+	src="resource/js/CheckPassStrength.js">
 	
 </script>
-<script src="templets/js/reg_new.js" language="javascript"
+<script src="resource/js/reg_new.js" language="javascript"
 	type="text/javascript">
 	
 </script>
@@ -90,14 +90,14 @@
 				} else {
 					document.write("晚上好，");
 				}
-			</script> 下午好， <i class="green">游客</i> 你可以选择到
+			</script><i class="green">游客</i> 你可以选择到
 			</span>
 		</div>
 	</div>
 	<div class="wrapper">
 		<div class="logo fLeft">
 			<a href="../member/"> <img
-				src="../member/templets/images/login_logo.gif" alt="会员中心"
+				src="resource/images/login_logo.gif" alt="会员中心"
 				style="margin:8px 0 0 25px;">
 			</a>
 		</div>
@@ -105,7 +105,7 @@
 	<div id="login" class="bor">
 		<div class="stip1"></div>
 		<div class="theme fLeft">
-			<form id="regUser" name="form2" action="reg_new.php" method="post">
+			<form id="regUser" name="form2" action="user.do" method="post">
 				<input type="hidden" name="dopost" value="regbase"> <input
 					type="hidden" name="step" value="1"> <input type="hidden"
 					name="mtype" value="个人">
@@ -119,56 +119,38 @@
 							个人
 					</label></li>
 					<li><span>用户名：</span> <input id="txtUsername"
-						class="intxt w200" type="text" name="userid"> <i
+						class="intxt w200" type="text" name="username"> <i
 						class="red">*</i> <em id="_userid">(可以使用中文，但禁止除[@][.]以外的特殊符号)</em>
 					</li>
 					<li><span id="uwname">用户笔名：</span> <input id="uname"
-						class="intxt w200" type="text" name="uname" size="20"> <i
+						class="intxt w200" type="text" name="nickname" size="20"> <i
 						class="red">*</i> <em id="_uname"> </em></li>
 					<em id="_uname">
 						<li><span>登陆密码：</span> <input id="txtPassword"
-							class="intxt w200" type="password" name="userpwd"
+							class="intxt w200" type="password" name="password"
 							style="font-family: verdana;"
 							onkeyup="setPasswordLevel(this, document.getElementById('passwordLevel'));">
 							<i class="red">*</i></li>
-						<li><span>密码强度：</span> <input id="passwordLevel"
-							class="rank r0" name="Input" disabled="disabled"></li>
+						
 						<li><span>确认密码：</span> <input id="userpwdok"
-							class="intxt w200" type="password" name="userpwdok" value=""
+							class="intxt w200" type="password" name="newpassword" value=""
 							size="20"> <i class="red">*</i> <em id="_userpwdok">
 								<font color="red"> <b>×两次输入密码不一致</b>
 							</font>
 						</em></li>
-						<li><span>请回答注册问题：</span>
-							<p class="cellBg">本站的名字是什么？ (答案:九九文章网)</p></li>
-						<li><span>您的回答是：</span> <input id="rsafeanswer"
-							class="intxt w200" type="text" style="width:200px;" size="25"
-							name="rsafeanswer"> <input type="hidden" value="1"
-							name="faqkey"> <i class="red">*</i></li>
+						
 						<li><span>电子邮箱：</span> <input id="email" class="intxt w200"
 							type="text" name="email"> <i class="red">*</i> <em
 							id="_email">(每个电子邮邮箱只能注册一个帐号)</em></li>
-						<li><span>安全问题：</span> <select id="safequestion"
-							name="safequestion">
-								<option selected="" value="0">没安全提示问题</option>
-								<option value="1">你最喜欢的格言什么？</option>
-								<option value="2">你家乡的名称是什么？</option>
-								<option value="3">你读的小学叫什么？</option>
-								<option value="4">你的父亲叫什么名字？</option>
-								<option value="5">你的母亲叫什么名字？</option>
-								<option value="6">你最喜欢的偶像是谁？</option>
-								<option value="7">你最喜欢的歌曲是什么？</option>
-						</select> <em id="_safequestion">(忘记密码时重设密码用)</em></li>
-						<li><span>问题答案：</span> <input id="safeanswer"
-							class="intxt w200" type="text" name="safeanswer" value="">
-					</li>
-						<li><span>性别：</span> <input type="radio" name="sex" value="男">
-							男 <input type="radio" name="sex" value="女"> 女 <input
+						
+						<li><span>性别：</span>
+						 <input type="radio" name="sex" value="0">
+							男 <input type="radio" name="sex" value="1"> 女 <input
 							type="radio" name="sex" value="" checked="checked"> 保密</li>
 						<li><span>验证码：</span> <input id="vdcode" class="intxt w200"
 							type="text" name="vdcode"
 							style="width: 50px; text-transform: uppercase;"> <img
-							id="vdimgck" align="absmiddle" src="../include/vdimgck.php"
+							id="vdimgck" align="absmiddle" src="resource/images/vdimgck.png"
 							alt="看不清？点击更换" style="cursor: pointer;"
 							onclick="this.src=this.src+'?'"> 看不清？ <a
 							onclick="changeAuthCode();" href="javascript:void(0)">点击更换</a></li>
@@ -187,7 +169,7 @@
 					</div> <br>
 					<ul>
 						<li><span> </span> <input id="agree" type="checkbox"
-							name="agree" value="" checked=""> 我已阅读并完全接受服务协议</li>
+							name="agree" value="" checked="" style="margin-left: 130px;"> 我已阅读并完全接受服务协议</li>
 						<li><span> </span>
 							<button id="btnSignCheck" class="buttonGreen142" type="submit">完
 								善 信 息</button></li>

@@ -1,16 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0042)http://www.jj59.com/member/article_add.php -->
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
-
-<title>发表普通文章 - 会员中心 - 九九文章网</title>
-<link href="resource/css/base.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="resource/js/j.js"></script>
-<script type="text/javascript" src="resource/js/inputAutoClear.js"></script>
-<script type="text/javascript" src="resource/js/load.js"></script>
-<script type="text/javascript" src="resource/js/leftmenu.js"></script>
-<script type="text/javascript" src="resource/js/checkSubmit.js"></script>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<jsp:include page="/WEB-INF/jsp/header.jsp" />
+<script  type="text/javascript" src="resource/ueditor-1.2.5/editor_all_min.js"></script>
+<script  type="text/javascript" src="resource/ueditor-1.2.5/editor_config.js"></script>
 <body>
 <div id="main">
   <script type="text/javascript" src="resource/js/jquery.js"></script> 
@@ -119,13 +113,7 @@
         <li class="ask"><a href="http://www.jj59.com/23/fbsm.html#3" target="_blank">文章审核需多久？</a></li>
         <li class="ask"><a href="http://www.jj59.com/23/fbsm.html#2" target="_blank">文章审核的标准？</a></li>
 		<li class="ask"><a href="http://www.jj59.com/23/fbsm.html#3" target="_blank">文章为何被退回？</a></li>
-    	</ul>
-     
-      	<!-- 系统设置菜单-->
-      
-        
-            
-        <!--<h2 class="menuTitle"><b class="showMenu"></b>操作主菜单项</h2> -->
+    	</ul>     
       </div>
       <div class="buttomGr"></div>
     </div>
@@ -135,99 +123,61 @@
           <li class="thisTab"><a href="http://www.jj59.com/member/article_add.php#"><span>发表普通文章</span></a></li>
         </ul>        
        </div>
-      <form name="addcontent" action="./发表普通文章 - 会员中心 - 九九文章网_files/发表普通文章 - 会员中心 - 九九文章网.html" method="post" enctype="multipart/form-data" onsubmit="return checkSubmit();">
+      <form name="addcontent" action="/article_publicArticle.do" method="post" enctype="multipart/form-data" onsubmit="return checkSubmit();">
           <input type="hidden" name="dopost" value="save">
           <input type="hidden" name="channelid" value="1">
-      <div id="mainCp">
-        <h3 class="meTitle"><strong>发表普通文章</strong></h3>
-        <div class="postForm">
-          <p class="cellBg">
-            <label>标题：</label>
-            <input name="title" type="text" id="title" value="请输入内容标题" maxlength="100" class="intxt" onfocus="inputAutoClear(this)">　　<span style="color:#F00">*</span>
-          </p>
-         <!-- <p>
-            <label>标签TAG：</label>
-            <input name="tags" type="text" id="tags" maxlength="100" class="intxt"/>
-          </p>
-		  -->
-          <p class="cellBg">
-           <label>来源：</label>
-           <input type="text" name="source" id="source" value="原创" maxlength="100" class="intxt" style="width:119px; line-height:18px;">　　　<span style="font-size:12px; line-height:15px;">转载的请注明。并在<a href="http://www.jj59.com/23/zdpb.html" target="_blank">排版工具</a>第九条，搜索本站是否存在</span>
-          </p>		  
-		  <p class="cellBg">
-            <label>作者：</label>
-            <input type="text" name="writer" id="writer" value="xdzbb" maxlength="100" class="intxt" style="width:219px">
-          </p>
-		  
-          <p>
-            <label>所属栏目：</label>
-            <select name="typeid" size="1">
-<option value="0" selected="">请选择栏目...</option>
-<option value="111" class="option2">文章</option>
-<option value="77" class="option3">──经典语录</option>
-<option value="39" class="option3">─情感文章</option>
-<option value="46" class="option3">─伤感文章</option>
-<option value="58" class="option3">─心情文章</option>
-<option value="64" class="option3">─人生哲理</option>
-<option value="73" class="option3">──人生感悟</option>
-<option value="65" class="option2">─励志文章</option>
-<option value="71" class="option3">──学习成功</option>
-<option value="70" class="option3">──励志文章</option>
-<option value="48" class="option2">─爱情文章</option>
-<option value="49" class="option3">──爱情文章</option>
-<option value="50" class="option3">──恋爱文章</option>
-<option value="63" class="option3">─搞笑文章</option>
-<option value="119" class="option3">──笑话</option>
-<option value="121" class="option3">─亲情文章</option>
-<option value="45" class="option2">伤感文章</option>
-</select>            <span style="color:#F00">*</span>(不能选择带颜色的分类)
-          </p>
-          <p class="cellBg">
-            <label>我的分类：</label>
-            <select name="mtypesid" size="1">
-<option value="0" selected="">请选择分类...</option>
-</select>            <a href="http://www.jj59.com/member/mtypes.php">添加分类</a>
-          </p>
-          <p>
-            <label>信息摘要：</label>
-            <textarea name="description" id="description"></textarea>(内容的简要说明)
-          </p>
-         <!-- <p class="cellBg">
-            <label>缩略图：</label>
-            <input name="litpic" type="file" id="litpic" onchange="SeePicNew('divpicview',this);"  maxlength="100" class="intxt"/>
-          </p-->
-      <input type="hidden" name="dede_addonfields" value="">
-    </div>
+	      <div id="mainCp">
+	        <h3 class="meTitle"><strong>发表普通文章</strong></h3>
+	        <div class="postForm">
+	          <p class="cellBg">
+	            <label>标题：</label>
+	            <input name="title" type="text" id="title" value="请输入内容标题" alt="文章标题" minlength="1" maxlength="100" class="intxt" onfocus="inputAutoClear(this)">　　<span style="color:#F00">*</span>
+	          </p>
+			  <p class="cellBg">
+	            <label>作者：</label>
+	            <input type="text" name="writer" id="writer" value="xdzbb" readonly="readonly" maxlength="100" class="intxt" style="width:219px">
+	          </p>		  
+	          <p>
+	            <label>所属栏目：</label>
+	            <select name="articletype" size="1">
+						<option value="0" selected="">请选择栏目...</option>		
+						<c:forEach items="${ typelist}" var="item" >
+						<option value="${item.id }" class="option2">${item.typename }</option>
+						</c:forEach>			
+				</select>            
+				<span style="color:#F00">*</span>(不能选择带颜色的分类)
+	          </p>          
+	          <p>
+	            <label>信息摘要：</label>
+	            <textarea name="summary" id="summary"></textarea>(内容的简要说明)
+	          </p> 
+	    </div>
         <!-- 表单操作区域 -->
-        <h3 class="meTitle">详细内容</h3>
-		<span style="line-height:20px;">（请使用<strong>规范的标点符号</strong>,尽量不要使用繁体字，<span class="STYLE1">格式杂乱的文章</span>将<strong>不被审核通过</strong>。文章排版推荐使用本站<a href="http://www.jj59.com/23/zdpb.html" target="_blank">自动排版工具</a>。<span class="STYLE1">每天发表不得超过2篇文章</span>，多余的文章将不予审核。详情看<a href="http://www.jj59.com/23/fbsm.html" target="_blank"><span class="STYLE1"><u>发表说明</u></span></a>)
-				<font color="#FF0000">用手机发表文章的作者，可以用<font color="#0000FF">&lt;br&gt;</font>来表示换行!</font></span>
-        <div class="contentShow postForm">
-          <p>
-          	<input type="hidden" id="body" name="body" value="" style="display:none"><input type="hidden" id="body___Config" value="FullPage=false" style="display:none"><iframe id="body___Frame" src="./发表普通文章 - 会员中心 - 九九文章网_files/fckeditor.html" width="100%" height="350" frameborder="0" scrolling="no"></iframe>          </p>
-                <p class="cellBg">
-            <label>验证码：</label>
-            <input name="vdcode" type="text" id="vdcode" maxlength="100" class="intxt" style="width:50px;text-transform:uppercase;">
-            <img src="./发表普通文章 - 会员中心 - 九九文章网_files/vdimgck.php" alt="看不清？点击更换" align="absmiddle" style="cursor:pointer" onclick="this.src=this.src+&#39;?&#39;"></p>
-            <p>
-             <button class="button2" type="submit">提交</button>
-             <button class="button2 ml10" type="reset" onclick="location.reload();">重置</button><font style="color:#FF0000;
-				  margin-left:50px;font-weight:bold;">友情提示:发表文章时，请先备份好您的文章，以免发表失败而丢失文章！</font>
-      </p>
-        </div>
+        <h3 class="meTitle">详细内容</h3>        
+      	<script id="ArtContent" name="ArtContent" type="text"></script> 
+      	<script type="text/javascript">
+			editor = UE.getEditor('ArtContent',{ initialContent:'',initialFrameWidth:600, initialFrameHeight:300, maximumWords:50000, elementPathEnabled:false, toolbars:toolbar_config.blogui, scaleEnabled:false, autoHeightEnabled:false });
+		</script>         
+         <p class="cellBg">
+         <label>验证码：</label>
+         <input name="vdcode" type="text" id="vdcode" maxlength="100" class="intxt" style="width:50px;text-transform:uppercase;">
+        	<img src="ValidateCode.do?t=<%=new Date().getTime()%>" alt="看不清？点击更换" align="absmiddle" style="cursor:pointer"  onclick="javascript:this.src='ValidateCode.do?'+ Math.random()" />
+         </p>
+        <p>
+         <button class="button2" type="submit">提交</button>
+         <button class="button2 ml10" type="reset" onclick="location.reload();">重置</button><font style="color:#FF0000;
+  			margin-left:50px;font-weight:bold;">友情提示:发表文章时，请先备份好您的文章，以免发表失败而丢失文章！</font>
+  		</p>
+      
       </div>
       </form>
       <!--主操作区域 -->
     </div>
   </div>
-<script language="javascript" type="text/javascript">
-	window.onload=function (){
-		setInterval("document.getElementById('time').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
-	}
-</script>
-
-<div id="footer">
-  <div class="fLeft">Copyright &#169; 2008-2011 九九文章网  版权所有  管理员QQ：782841080</div>
-  <div id="time" class="fRight">Wed Dec 25 2013 09:41:31 GMT+0800 (CST) 星期三</div>
-</div>
+	<script language="javascript" type="text/javascript">
+		window.onload=function (){
+			setInterval("document.getElementById('time').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+		}
+	</script>
+<jsp:include page="/WEB-INF/jsp/footer.jsp"/>   
 </div>

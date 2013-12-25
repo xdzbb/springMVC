@@ -20,6 +20,7 @@ public class Article implements java.io.Serializable {
 	private String keyword;
 	private String title;
 	private String content;
+	private String summary;
 	private Integer createtime;
 	private Integer publictime;
 	private Integer status;
@@ -43,7 +44,7 @@ public class Article implements java.io.Serializable {
 
 	/** full constructor */
 	public Article(Integer id, Integer userid, Integer typeid, String keyword,
-			String title, String content, Integer createtime,
+			String title, String content,String summary, Integer createtime,
 			Integer publictime, Integer status, Integer praisecount) {
 		this.id = id;
 		this.userid = userid;
@@ -51,6 +52,7 @@ public class Article implements java.io.Serializable {
 		this.keyword = keyword;
 		this.title = title;
 		this.content = content;
+		this.summary = summary;
 		this.createtime = createtime;
 		this.publictime = publictime;
 		this.status = status;
@@ -111,6 +113,15 @@ public class Article implements java.io.Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	@Column(name = "summary", nullable = false, length = 100)
+	public String getSummary() {
+		return this.summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
 	@Column(name = "createtime")

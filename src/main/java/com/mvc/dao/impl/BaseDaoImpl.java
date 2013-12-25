@@ -1,32 +1,27 @@
 package com.mvc.dao.impl;
 
 import java.util.List;
-import javax.annotation.Resource;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.mvc.dao.IBaseDao;
-import com.mvc.entity.Pager;
+import com.mvc.util.Pager;
 
 @Repository("baseDao")
 public class BaseDaoImpl<T> implements IBaseDao<T> {	
 	
 	private final static Integer baseNum=1;//增删该返回的受影响行数
-	
+
 	@Autowired
 	private HibernateTemplate ht; 
-
 	//保存对象
 	@Override
 	public int saveObject(T t) {
@@ -45,7 +40,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	
 	// 根据id获取对象
 	@Override
-	public Object getObjectById(T clazz,Integer id){	
+	public Object getObjectById(T clazz,Integer id){			
 		return ht.get(clazz.getClass(), id);
 	}
 
@@ -73,7 +68,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public List<?> getList(final String hql, final Integer num)
-			throws DataAccessException {	
+			throws DataAccessException {		
 		return (List<?>) ht.execute(new HibernateCallback() {
 			public Object doInHibernate(Session session)
 					throws HibernateException {

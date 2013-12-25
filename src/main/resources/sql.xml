@@ -22,12 +22,13 @@ CREATE TABLE `article` (
   `typeid` int(11) not null COMMENT '文章分类表',
   `keyword` varchar(20) NULL COMMENT '文章关键词',
   `title` varchar(256) not NULL COMMENT '文章标题',
+  `summary` varchar(100) comment '文章摘要',
   `content` text not NULL COMMENT '文章内容',
   `createtime` int  null COMMENT '文章发布时间',
   `publictime` int  null comment '通过时间',
   `status` int(11) DEFAULT NULL comment '0,代表通过 1，代表拒绝',
   `praisecount` int(11) default null comment '点赞数',
-  PRIMARY KEY (`id`),
+   PRIMARY KEY (`id`),
    FOREIGN KEY (`userid`) REFERENCES `tuser`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (`typeid`) REFERENCES `articletype`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
    

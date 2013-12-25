@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
 
-import com.mvc.entity.Pager;
+import com.mvc.util.Pager;
 
 public interface IBaseDao<T> {		
 		/**
@@ -32,7 +32,7 @@ public interface IBaseDao<T> {
 		public abstract int deleteObject(T object);		
 			
 		// 根据id获取对象
-		public abstract Object getObjectById(T clazz, Integer id);
+		public abstract Object getObjectById(T clazz,Integer id);
 		
 		// 插入对象
 		public abstract int saveObject(T object);

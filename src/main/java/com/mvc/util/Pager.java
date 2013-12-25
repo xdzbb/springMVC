@@ -1,4 +1,4 @@
-package com.mvc.entity;
+package com.mvc.util;
 
 import java.util.ArrayList;
 import java.util.List;

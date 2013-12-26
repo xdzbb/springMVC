@@ -6,5 +6,5 @@
 <script type="text/javascript" src="resource/js/inputAutoClear.js"></script>
 <script type="text/javascript" src="resource/js/load.js"></script>
 <script type="text/javascript" src="resource/js/leftmenu.js"></script>
-<script type="text/javascript" src="resource/js/checkSubmit.js"></script>
+<script type="text/javascript" src="resource/js/checkForm.js"></script>
 </head>

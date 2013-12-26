@@ -19,9 +19,9 @@ public class ArticleServiceImpl implements IArticleService {
 	private IBaseDao<Article> baseDao;
 	
 	@Override
-	public int publishArticle() {
+	public int publishArticle(Article article) {
 		// TODO Auto-generated method stub
-		return 0;
+		return baseDao.saveObject(article);
 	}
 
 	@Override

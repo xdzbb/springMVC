@@ -1,9 +1,11 @@
 package com.mvc.service;
 
+import com.mvc.entity.Article;
+
 import antlr.collections.List;
 
 public interface IArticleService {
-	public int publishArticle();
+	public int publishArticle(Article article);
 	public int deleteArticle();
 	public int recommendArticle();
 	public int banArticle();

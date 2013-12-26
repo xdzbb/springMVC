@@ -123,44 +123,51 @@
           <li class="thisTab"><a href="http://www.jj59.com/member/article_add.php#"><span>发表普通文章</span></a></li>
         </ul>        
        </div>
-      <form name="addcontent" action="/article_publicArticle.do" method="post" enctype="multipart/form-data" onsubmit="return checkSubmit();">
-          <input type="hidden" name="dopost" value="save">
-          <input type="hidden" name="channelid" value="1">
-	      <div id="mainCp">
+      <form name="addcontent" action="article_publicArticle.do" method="post" onsubmit="return checkform();">
+         <div id="mainCp">
 	        <h3 class="meTitle"><strong>发表普通文章</strong></h3>
 	        <div class="postForm">
+	          <c:if test="${!empty error }">
+	          <p class="cellBg">	          
+	            <label>提示：</label>
+	            <font style="color:red">${error }</font>
+	          </p>
+	          </c:if>
 	          <p class="cellBg">
 	            <label>标题：</label>
-	            <input name="title" type="text" id="title" value="请输入内容标题" alt="文章标题" minlength="1" maxlength="100" class="intxt" onfocus="inputAutoClear(this)">　　<span style="color:#F00">*</span>
+	            <input name="title" type="text" id="title" value="${article.title }" alt="文章标题" minlength="1" maxlength="100" class="intxt" onfocus="inputAutoClear(this)">　　<span style="color:#F00">*</span>
 	          </p>
 			  <p class="cellBg">
 	            <label>作者：</label>
-	            <input type="text" name="writer" id="writer" value="xdzbb" readonly="readonly" maxlength="100" class="intxt" style="width:219px">
+	            <input type="text" name="userid" id="userid" value="1234" readonly="readonly" maxlength="100" class="intxt" style="width:219px">
 	          </p>		  
 	          <p>
 	            <label>所属栏目：</label>
-	            <select name="articletype" size="1">
-						<option value="0" selected="">请选择栏目...</option>		
+	            <select name="typeid" size="1">						
 						<c:forEach items="${ typelist}" var="item" >
 						<option value="${item.id }" class="option2">${item.typename }</option>
 						</c:forEach>			
 				</select>            
 				<span style="color:#F00">*</span>(不能选择带颜色的分类)
-	          </p>          
+	          </p>  
+	          <p>
+	            <label>关键词：</label>
+	            <textarea name="keyword" id="keyword">${article.keyword }</textarea>(内容的简要说明)
+	          </p>         
 	          <p>
 	            <label>信息摘要：</label>
-	            <textarea name="summary" id="summary"></textarea>(内容的简要说明)
+	            <textarea name="summary" id="summary">${article.summary }</textarea>(内容的简要说明)
 	          </p> 
 	    </div>
         <!-- 表单操作区域 -->
         <h3 class="meTitle">详细内容</h3>        
-      	<script id="ArtContent" name="ArtContent" type="text"></script> 
+      	<script id="ArtContent" name="ArtContent" type="text">${article.content }</script> 
       	<script type="text/javascript">
 			editor = UE.getEditor('ArtContent',{ initialContent:'',initialFrameWidth:600, initialFrameHeight:300, maximumWords:50000, elementPathEnabled:false, toolbars:toolbar_config.blogui, scaleEnabled:false, autoHeightEnabled:false });
 		</script>         
          <p class="cellBg">
          <label>验证码：</label>
-         <input name="vdcode" type="text" id="vdcode" maxlength="100" class="intxt" style="width:50px;text-transform:uppercase;">
+         <input name="vdcode" type="text" id="vdcode" maxlength="100" class="intxt" style="width:50px;">
         	<img src="ValidateCode.do?t=<%=new Date().getTime()%>" alt="看不清？点击更换" align="absmiddle" style="cursor:pointer"  onclick="javascript:this.src='ValidateCode.do?'+ Math.random()" />
          </p>
         <p>
@@ -168,7 +175,6 @@
          <button class="button2 ml10" type="reset" onclick="location.reload();">重置</button><font style="color:#FF0000;
   			margin-left:50px;font-weight:bold;">友情提示:发表文章时，请先备份好您的文章，以免发表失败而丢失文章！</font>
   		</p>
-      
       </div>
       </form>
       <!--主操作区域 -->

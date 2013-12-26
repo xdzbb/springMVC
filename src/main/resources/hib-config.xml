@@ -98,7 +98,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 			<tx:method name="modify*" />
 			<tx:method name="edit*" />
 			<tx:method name="delete*" />
-			<tx:method name="remove*" />
+			<tx:method name="transaction*" />
 			<tx:method name="repair" />
 			<tx:method name="deleteAndRepair" />
 
@@ -109,11 +109,11 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 			<tx:method name="datagrid*" propagation="SUPPORTS" />
 
 			<tx:method name="*" propagation="SUPPORTS" />
-			<!-- get开头的方法不需要在事务中运行 。 
-			有些情况是没有必要使用事务的，比如获取数据。开启事务本身对性能是有一定的影响的--> 
-			<tx:method name="*"/>    <!-- 其他方法在实务中运行 --> 
+			get开头的方法不需要在事务中运行 。 
+			有些情况是没有必要使用事务的，比如获取数据。开启事务本身对性能是有一定的影响的 
+			<tx:method name="*"/>    其他方法在实务中运行 
 		</tx:attributes> 
-	</tx:advice> 
+	</tx:advice>
 	
 	 <!-- 支持aop注解 -->
 	  <aop:aspectj-autoproxy />

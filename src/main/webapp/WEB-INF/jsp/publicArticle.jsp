@@ -6,8 +6,7 @@
 <script  type="text/javascript" src="resource/ueditor-1.2.5/editor_all_min.js"></script>
 <script  type="text/javascript" src="resource/ueditor-1.2.5/editor_config.js"></script>
 <body>
-<div id="main">
-  <script type="text/javascript" src="resource/js/jquery.js"></script> 
+<div id="main">  
 <div id="header">
   <div id="siteNav">
     <div class="innerWrap">

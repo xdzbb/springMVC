@@ -14,5 +14,6 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
   http://www.springframework.org/schema/context   
    http://www.springframework.org/schema/context/spring-context-3.1.xsd
 ">		
-	<import resource="classpath*:hib-config.xml"/>	
+	<import resource="classpath*:hib-config.xml"/>
+	<import resource="classpath*:interceptor-config.xml"/>	
 </beans>

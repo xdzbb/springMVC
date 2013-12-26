@@ -31,8 +31,7 @@
           p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" >
           	<!--jsp页面支持jstl  -->
        		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-       </bean>
-       
+       </bean>      
        <!-- spring文件上传类 -->
        <bean id="multipartResolver"     
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver"     

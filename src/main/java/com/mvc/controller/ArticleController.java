@@ -31,7 +31,7 @@ public class ArticleController{
 	
 	
 	@RequestMapping(value="/article_publicArticle.do",method = RequestMethod.GET)
-	public String publicArticle(ModelMap map){
+	public String publicArticle(HttpServletRequest request,ModelMap map,ModelAndView modelAndView){
 		List<Articletype> typelist = (List<Articletype>) articleTypeService.getArticleTypeList();		
 		map.addAttribute("typelist", typelist);		
 		return "publicArticle";

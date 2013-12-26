@@ -1,50 +1,50 @@
-<!--
+/*<!--
 $(document).ready(function()
 {
-	//ÓÃ»§ÀàĞÍ
-	if($('.usermtype2').attr("checked")==true) $('#uwname').text('¹«Ë¾Ãû³Æ£º'); 
+	//ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
+	if($('.usermtype2').attr("checked")==true) $('#uwname').text('ï¿½ï¿½Ë¾ï¿½ï¿½Æ£ï¿½'); 
 	$('.usermtype').click(function()
 	{
-		$('#uwname').text('ÓÃ»§±ÊÃû£º');
+		$('#uwname').text('ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½');
 	});
 	$('.usermtype2').click(function()
 	{
-		$('#uwname').text('¹«Ë¾Ãû³Æ£º');
+		$('#uwname').text('ï¿½ï¿½Ë¾ï¿½ï¿½Æ£ï¿½');
 	});
 	//checkSubmit
 	$('#regUser').submit(function ()
 	{
 		if(!$('#agree').get(0).checked) {
-			alert("Äã±ØĞëÍ¬Òâ×¢²áĞ­Òé£¡");
+			alert("è¯·é˜…è¯»ä¼šå‘˜æ³¨å†Œåè®®ï¼ï¼ï¼");
 			return false;
 		}
-		if($('#txtUsername').val()==""){
-			$('#txtUsername').focus();
-			alert("ÓÃ»§Ãû²»ÄÜÎª¿Õ£¡");
+		if($('#username').val()==""){
+			$('#username').focus();
+			alert("è¯·å¡«å†™æ­£ç¡®çš„ç”¨æˆ·åï¼ï¼ï¼");
 			return false;
 		}
-		if($('#txtPassword').val()=="")
+		if($('#password').val()=="")
 		{
-			$('#txtPassword').focus();
-			alert("µÇÂ½ÃÜÂë²»ÄÜÎª¿Õ£¡");
+			$('#password').focus();
+			alert("è¯·è¾“å…¥å¯†ç ï¼ï¼ï¼");
 			return false;
 		}
-		if($('#userpwdok').val()!=$('#txtPassword').val())
+		if($('#newpassword').val()!=$('#password').val())
 		{
-			$('#userpwdok').focus();
-			alert("Á½´ÎÃÜÂë²»Ò»ÖÂ£¡");
+			$('#newpassword').focus();
+			alert("ä¸¤æ¬¡è¾“å…¥çš„å¯†ç ä¸ä¸€è‡´ï¼ï¼ï¼");
 			return false;
 		}
-		if($('#uname').val()=="")
+		if($('#nickname').val()=="")
 		{
-			$('#uname').focus();
-			alert("ÓÃ»§êÇ³Æ²»ÄÜÎª¿Õ£¡");
+			$('#nickname').focus();
+			alert("è¯·å¡«å†™ç¬”åï¼ï¼ï¼");
 			return false;
 		}
 		if($('#vdcode').val()=="")
 		{
 			$('#vdcode').focus();
-			alert("ÑéÖ¤Âë²»ÄÜÎª¿Õ£¡");
+			alert("è¯·è¾“å…¥éªŒè¯ç ï¼ï¼ï¼");
 			return false;
 		}
 	})
@@ -57,20 +57,20 @@ $(document).ready(function()
 		success: function(result){$("#_userid").html(result);}}); 
 	});
 	
-	/*
+	
 	$("#uname").change( function() {
 		$.ajax({type: reMethod,url: "index_do.php",
 		data: "dopost=checkuser&fmdo=user&cktype=0&uid="+$("#uname").val(),
 		dataType: 'html',
 		success: function(result){$("#_uname").html(result);}}); 
 	});
-	*/
+	
 	
 	$("#email").change( function() {
 		var sEmail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
 		if(!sEmail.exec($("#email").val()))
 		{
-			$('#_email').html("<font color='red'><b>¡ÁEmail¸ñÊ½²»ÕıÈ·</b></font>");
+			$('#_email').html("<font color='red'><b>ï¿½ï¿½Emailï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½È·</b></font>");
 			$('#email').focus();
 		}else{
 			$.ajax({type: reMethod,url: "index_do.php",
@@ -83,38 +83,38 @@ $(document).ready(function()
 	$('#txtPassword').change( function(){
 		if($('#txtPassword').val().length < pwdmin)
 		{
-			$('#_userpwdok').html("<font color='red'><b>¡ÁÃÜÂë²»ÄÜĞ¡ÓÚ"+pwdmin+"Î»</b></font>");
+			$('#_userpwdok').html("<font color='red'><b>ï¿½ï¿½ï¿½ï¿½ï¿½ë²»ï¿½ï¿½Ğ¡ï¿½ï¿½"+pwdmin+"Î»</b></font>");
 		}
 		else if($('#userpwdok').val()!=$('txtPassword').val())
 		{
-			$('#_userpwdok').html("<font color='red'><b>¡ÁÁ½´ÎÊäÈëÃÜÂë²»Ò»ÖÂ</b></font>");
+			$('#_userpwdok').html("<font color='red'><b>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²»Ò»ï¿½ï¿½</b></font>");
 		}
 		else if($('#userpwdok').val().length < pwdmin)
 		{
-			$('#_userpwdok').html("<font color='red'><b>¡ÁÃÜÂë²»ÄÜĞ¡ÓÚ"+pwdmin+"Î»</b></font>");
+			$('#_userpwdok').html("<font color='red'><b>ï¿½ï¿½ï¿½ï¿½ï¿½ë²»ï¿½ï¿½Ğ¡ï¿½ï¿½"+pwdmin+"Î»</b></font>");
 		}
 		else
 		{
-			$('#_userpwdok').html("<font color='#4E7504'><b>¡ÌÌîĞ´ÕıÈ·</b></font>");
+			$('#_userpwdok').html("<font color='#4E7504'><b>ï¿½ï¿½ï¿½ï¿½Ğ´ï¿½ï¿½È·</b></font>");
 		}
 	});
 	
 	$('#userpwdok').change( function(){
 		if($('#txtPassword').val().length < pwdmin)
 		{
-			$('#_userpwdok').html("<font color='red'><b>¡ÁÃÜÂë²»ÄÜĞ¡ÓÚ"+pwdmin+"Î»</b></font>");
+			$('#_userpwdok').html("<font color='red'><b>ï¿½ï¿½ï¿½ï¿½ï¿½ë²»ï¿½ï¿½Ğ¡ï¿½ï¿½"+pwdmin+"Î»</b></font>");
 		}
 		else if($('#userpwdok').val()=='')
 		{
-			$('#_userpwdok').html("<b>ÇëÌîĞ´È·ÈÏÃÜÂë</b>");
+			$('#_userpwdok').html("<b>ï¿½ï¿½ï¿½ï¿½Ğ´È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</b>");
 		}
 		else if($('#userpwdok').val()!=$('#txtPassword').val())
 		{
-			$('#_userpwdok').html("<font color='red'><b>¡ÁÁ½´ÎÊäÈëÃÜÂë²»Ò»ÖÂ</b></font>");
+			$('#_userpwdok').html("<font color='red'><b>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²»Ò»ï¿½ï¿½</b></font>");
 		}
 		else
 		{
-			$('#_userpwdok').html("<font color='#4E7504'><b>¡ÌÌîĞ´ÕıÈ·</b></font>");
+			$('#_userpwdok').html("<font color='#4E7504'><b>ï¿½ï¿½ï¿½ï¿½Ğ´ï¿½ï¿½È·</b></font>");
 		}
 	});
 	
@@ -123,4 +123,4 @@ $(document).ready(function()
 		return false;
 	});
 });
--->
+-->*/

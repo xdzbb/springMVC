@@ -4,24 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>什么网>>会员注册</title>
-<link type="text/css" rel="stylesheet" href="resource/css/login.css">
-</link>
-<script type="text/javascript" language="javascript"
-	src="resource/js/j.js">
-	
-</script>
-<script type="text/javascript" language="javascript"
-	src="resource/js/js/base.js">
-	
-</script>
-<script language="javascript" type="text/javascript"
-	src="resource/js/CheckPassStrength.js">
-	
-</script>
-<script src="resource/js/reg_new.js" language="javascript"
-	type="text/javascript">
-	
-</script>
+<jsp:include page="/WEB-INF/jsp/header.jsp" />
 <script language="javascript" type="text/javascript">
 <!--
 	var reMethod = "GET", pwdmin = 3;
@@ -96,16 +79,16 @@
 	</div>
 	<div class="wrapper">
 		<div class="logo fLeft">
-			<a href="../member/"> <img
-				src="resource/images/login_logo.gif" alt="会员中心"
-				style="margin:8px 0 0 25px;">
+			<a href="../member/"> <img src="resource/images/login_logo.gif"
+				alt="会员中心" style="margin:8px 0 0 25px;">
 			</a>
 		</div>
 	</div>
 	<div id="login" class="bor">
 		<div class="stip1"></div>
 		<div class="theme fLeft">
-			<form id="regUser" name="form2" action="user.do" method="post">
+			<form id="regUser" name="form2" action="user.do" method="post"
+				onsubmit="return checkform();">
 				<input type="hidden" name="dopost" value="regbase"> <input
 					type="hidden" name="step" value="1"> <input type="hidden"
 					name="mtype" value="个人">
@@ -118,37 +101,49 @@
 							class="usermtype" type="radio" checked="" value="个人" name="mtype">
 							个人
 					</label></li>
-					<li><span>用户名：</span> <input id="txtUsername"
-						class="intxt w200" type="text" name="username"> <i
-						class="red">*</i> <em id="_userid">(可以使用中文，但禁止除[@][.]以外的特殊符号)</em>
+					<li><span>用户名：</span> <input id="username" class="intxt w200"
+						type="text" name="username" alt="请输入用户名" minlength="1"
+						maxlength="100"> <i class="red">*</i> <em id="_userid">(可以使用中文，但禁止除[@][.]以外的特殊符号)</em>
 					</li>
-					<li><span id="uwname">用户笔名：</span> <input id="uname"
-						class="intxt w200" type="text" name="nickname" size="20"> <i
-						class="red">*</i> <em id="_uname"> </em></li>
+					<li><span id="nickname">用户笔名：</span> <input id="nickname"
+						class="intxt w200" type="text" name="nickname" size="20"
+						alt="请输入笔名" minlength="1" maxlength="100"> <i class="red">*</i>
+						<em id="_uname"> </em></li>
 					<em id="_uname">
-						<li><span>登陆密码：</span> <input id="txtPassword"
+						<script type="text/javascript">
+							function checkPwd() {
+								if($("#password").val()==$("#newpassword").val()){
+									alert(1);
+								}
+							}
+						</script>
+						<li><span>登陆密码：</span> <input id="password"
 							class="intxt w200" type="password" name="password"
-							style="font-family: verdana;"
-							onkeyup="setPasswordLevel(this, document.getElementById('passwordLevel'));">
-							<i class="red">*</i></li>
-						
-						<li><span>确认密码：</span> <input id="userpwdok"
+							style="font-family: verdana;" alt="请输入密码" minlength="1"
+							maxlength="100"> <i class="red">*</i></li>
+
+						<li><span>确认密码：</span> <input id="newpassword"
 							class="intxt w200" type="password" name="newpassword" value=""
-							size="20"> <i class="red">*</i> <em id="_userpwdok">
-								<font color="red"> <b>×两次输入密码不一致</b>
+							alt="请再次输入密码" minlength="1" maxlength="100" size="20"> <i
+							class="red">*</i> <em id="_userpwdok"> <font color="red">
+									<b>(请保持密码一致)</b>
 							</font>
 						</em></li>
-						
 						<li><span>电子邮箱：</span> <input id="email" class="intxt w200"
-							type="text" name="email"> <i class="red">*</i> <em
-							id="_email">(每个电子邮邮箱只能注册一个帐号)</em></li>
-						
-						<li><span>性别：</span>
-						 <input type="radio" name="sex" value="0">
+							type="text" name="email" alt="请输入电子邮箱" minlength="1"
+							maxlength="100"> <i class="red">*</i> <em id="_email">(每个电子邮邮箱只能注册一个帐号)</em>
+					</li>
+
+						<li><span>性别：</span> <input type="radio" name="sex" value="0">
 							男 <input type="radio" name="sex" value="1"> 女 <input
 							type="radio" name="sex" value="" checked="checked"> 保密</li>
+
+						<li><span>电话号码：</span> <input id="tel" class="intxt w200"
+							type="text" name="tel" alt="请输入电话号码" minlength="1"
+							maxlength="100"> <i class="red">*</i> <em id="tel">(请填写真实的手机号码)</em>
+					</li>
 						<li><span>验证码：</span> <input id="vdcode" class="intxt w200"
-							type="text" name="vdcode"
+							type="text" name="vdcode" alt="验证码" minlength="1" maxlength="100"
 							style="width: 50px; text-transform: uppercase;"> <img
 							id="vdimgck" align="absmiddle" src="resource/images/vdimgck.png"
 							alt="看不清？点击更换" style="cursor: pointer;"
@@ -169,7 +164,8 @@
 					</div> <br>
 					<ul>
 						<li><span> </span> <input id="agree" type="checkbox"
-							name="agree" value="" checked="" style="margin-left: 130px;"> 我已阅读并完全接受服务协议</li>
+							name="agree" value="" checked="" style="margin-left: 130px;">
+							我已阅读并完全接受服务协议</li>
 						<li><span> </span>
 							<button id="btnSignCheck" class="buttonGreen142" type="submit">完
 								善 信 息</button></li>

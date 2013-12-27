@@ -1,12 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>什么网>>会员注册</title>
+<link type="text/css" rel="stylesheet" href="resource/css/login.css">
 <jsp:include page="/WEB-INF/jsp/header.jsp" />
 <script language="javascript" type="text/javascript">
-<!--
 	var reMethod = "GET", pwdmin = 3;
 	function changeAuthCode() {
 		var num = new Date().getTime();
@@ -44,11 +40,8 @@
 		 $('#ver_code').css('visibility','hidden');
 		 });
 		 */
-	})
-	-->
+	})	
 </script>
-</head>
-
 <body>
 	<div class="header">
 		<div class="auto960">

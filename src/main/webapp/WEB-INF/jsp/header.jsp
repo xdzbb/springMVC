@@ -8,6 +8,5 @@
 <script type="text/javascript" src="resource/js/jquery.js"></script>
 <script type="text/javascript" src="resource/js/leftmenu.js"></script>
 <script type="text/javascript" src="resource/js/checkForm.js"></script>
-<link type="text/css" rel="stylesheet" href="resource/css/login.css">
 </link>
 </head>

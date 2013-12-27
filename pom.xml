@@ -188,7 +188,7 @@
       <groupId>dom4j</groupId>
       <artifactId>dom4j</artifactId>
       <version>${dom4j.version}</version>
-    </dependency>
+    </dependency>   
   </dependencies>
   <build>
     <plugins>
@@ -205,6 +205,10 @@
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
+           <encoding>UTF-8</encoding>
+           <compilerArguments>
+             <extdirs>src\main\webapp\WEB-INF\lib</extdirs>
+           </compilerArguments>
         </configuration>
       </plugin>
       <plugin>

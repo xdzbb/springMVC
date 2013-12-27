@@ -1,62 +1,91 @@
 package com.mvc.controller;
 
 import java.io.File;
+import java.net.URL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.iterators.EnumerationIterator;
+import org.apache.commons.fileupload.FileItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.alibaba.fastjson.JSONWriter.State;
+import com.mvc.util.DFSTracker;
 import com.mvc.util.Uploader;
 
 @Controller
-public class UeditorController{
-
-	//ueditor上传图片
+public class UeditorController implements ServletContextAware {
+	private ServletContext servletContext;
+	@Resource(name="dfsTracker")
+	private DFSTracker dfsTracker;
+	@Override
+	public void setServletContext(ServletContext arg0) {
+		// TODO Auto-generated method stub
+		this.servletContext = arg0;
+	}
+	/*//ueditor上传图片
 	@RequestMapping("/ueditor_imageUp.do")
-	public String imageUp(HttpServletRequest request,HttpServletResponse response) {
+	public String imageUp(@RequestParam("upfile") CommonsMultipartFile file,HttpServletRequest request,HttpServletResponse response) {
 		try {			
-			HttpSession session = request.getSession();
-			
-			String status = request.getParameter("status");
-			System.out.println("************"+status);
+			HttpSession session = request.getSession();	
 			request.setCharacterEncoding("utf-8");
-			response.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("utf-8");	
 		    Uploader up = new Uploader(request);		   
-		    up.setSavePath("mnt/imgsvr/email/uploadImage/");
+		    up.setSavePath("/home/xdzbb/temp");
 		    String[] fileType = {".gif" , ".png" , ".jpg" , ".jpeg" , ".bmp"};
 		    up.setAllowFiles(fileType);
 		    up.setMaxSize(10000); //单位KB
 			up.upload();
-			String url = up.getUrl().replaceAll("mnt/imgsvr/", "");
+			String url = up.getUrl();		
 			response.getWriter().print("{'original':'"+up.getOriginalName()+"','url':'"+url+"','title':'"+up.getTitle()+"','state':'"+up.getState()+"'}");
 	    } catch (Exception e) {
 	    	e.printStackTrace();
 	    }
 		return null;
+	}*/
+	//ueditor上传图片
+	@RequestMapping("/ueditor_imageUp.do")
+	public String imageUp(@RequestParam("upfile") CommonsMultipartFile file,HttpServletRequest request,HttpServletResponse response) {
+		try {			
+			HttpSession session = request.getSession();	
+			request.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("utf-8");	
+			Uploader up = new Uploader(request,dfsTracker);
+			/*String[] fileType = {".gif" , ".png" , ".jpg" , ".jpeg" , ".bmp"};
+			up.setAllowFiles(fileType);*/
+			up.springUpload(file);
+			response.getWriter().print("{'url':'"+up.getUrl()+"','fileType':'"+up.getType()+"','state':'"+up.getState()+"','original':'"+up.getOriginalName()+"'}");
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    }
+		return null;
 	}
-	
 	//ueditor上传文件
 	@RequestMapping("/ueditor_fileUp.do")
-	public String fileUp(HttpServletRequest request, HttpServletResponse response) {
-		try {			
-			request.setCharacterEncoding("utf-8");
-		    response.setCharacterEncoding("utf-8");
-		    Uploader up = new Uploader(request);
-		    up.setSavePath("mnt/imgsvr/email/uploadFile"); //保存路径
-		    String[] fileType = {".rar" , ".doc" , ".docx" , ".zip" , ".pdf" , ".txt" , ".swf", ".wmv"};  //允许的文件类型
-		    up.setAllowFiles(fileType);
-		    up.setMaxSize(10000);        //允许的文件最大尺寸，单位KB
-		    up.upload();
-		    response.getWriter().print("{'url':'"+up.getUrl()+"','fileType':'"+up.getType()+"','state':'"+up.getState()+"','original':'"+up.getOriginalName()+"'}");
+	public String fileUp(@RequestParam("upfile") CommonsMultipartFile file,HttpServletRequest request, HttpServletResponse response) {
+		 try {			
+				HttpSession session = request.getSession();	
+				request.setCharacterEncoding("utf-8");
+				response.setCharacterEncoding("utf-8");	
+				Uploader up = new Uploader(request,dfsTracker);
+				 String[] fileType = {".rar" , ".doc" , ".docx" , ".zip" , ".pdf" , ".txt" , ".swf", ".wmv"}; 
+				up.setAllowFiles(fileType);
+				up.springUpload(file);
+				response.getWriter().print("{'url':'"+up.getUrl()+"','fileType':'"+up.getType()+"','state':'"+up.getState()+"','original':'"+up.getOriginalName()+"'}");
 	    } catch (Exception e) {
 	    	e.printStackTrace();
 	    }
@@ -69,15 +98,14 @@ public class UeditorController{
 		try {
 		
 			//仅做示例用，请自行修改
-			HttpSession session = request.getSession();		
-			String status = request.getParameter("status");
+			HttpSession session = request.getSession();	
 			String path = "";		
-			path = "mnt/imgsvr/email/uploadImage/";			
+			path = "/home/xdzbb/temp";			
 			String imgStr ="";
 			String realpath = "/"+path;
 			List<File> files = getFiles(realpath,new ArrayList());
 			for(File file :files ){
-				imgStr+=file.getPath().replace("mnt/imgsvr/","")+"ue_separate_ue";
+				imgStr+=file.getPath()+"ue_separate_ue";
 			}
 			if(imgStr!=""){
 		        imgStr = imgStr.substring(0,imgStr.lastIndexOf("ue_separate_ue")).replace(File.separator, "/").trim();
@@ -124,5 +152,4 @@ public class UeditorController{
 		}
 		return "";
 	}
-	
 }

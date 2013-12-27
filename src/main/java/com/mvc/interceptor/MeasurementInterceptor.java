@@ -42,8 +42,7 @@ public class MeasurementInterceptor implements HandlerInterceptor {
         long endTime = System.currentTimeMillis();
         long handlingTime = endTime-startTime;
         if(!isexclude){
-        	System.out.println("handlingTime:"+handlingTime+"ms");
-        	modelAndView.addObject("handlingTime",endTime-startTime); 
+        	System.out.println("handlingTime:"+handlingTime+"ms");        	
         }
         
     }

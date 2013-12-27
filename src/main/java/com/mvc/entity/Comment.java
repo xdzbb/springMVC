@@ -1,26 +1,26 @@
 package com.mvc.entity;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
  * Comment entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "comment")
+@Table(name = "comment", catalog = "mvcdb")
 public class Comment implements java.io.Serializable {
 
 	// Fields
 
 	private Integer id;
+	private Tuser tuser;
 	private Integer modelid;
 	private String model;
-	private Integer userid;
 	private String content;
 	private Integer time;
 
@@ -31,27 +31,26 @@ public class Comment implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Comment(Integer id, Integer modelid, Integer userid, String content) {
+	public Comment(Integer id, Tuser tuser, Integer modelid, String content) {
 		this.id = id;
+		this.tuser = tuser;
 		this.modelid = modelid;
-		this.userid = userid;
 		this.content = content;
 	}
 
 	/** full constructor */
-	public Comment(Integer id, Integer modelid, String model, Integer userid,
+	public Comment(Integer id, Tuser tuser, Integer modelid, String model,
 			String content, Integer time) {
 		this.id = id;
+		this.tuser = tuser;
 		this.modelid = modelid;
 		this.model = model;
-		this.userid = userid;
 		this.content = content;
 		this.time = time;
 	}
 
 	// Property accessors
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
@@ -59,6 +58,16 @@ public class Comment implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userid", nullable = false)
+	public Tuser getTuser() {
+		return this.tuser;
+	}
+
+	public void setTuser(Tuser tuser) {
+		this.tuser = tuser;
 	}
 
 	@Column(name = "modelid", nullable = false)
@@ -77,15 +86,6 @@ public class Comment implements java.io.Serializable {
 
 	public void setModel(String model) {
 		this.model = model;
-	}
-
-	@Column(name = "userid", nullable = false)
-	public Integer getUserid() {
-		return this.userid;
-	}
-
-	public void setUserid(Integer userid) {
-		this.userid = userid;
 	}
 
 	@Column(name = "content", nullable = false, length = 256)

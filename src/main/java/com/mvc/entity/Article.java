@@ -1,33 +1,33 @@
 package com.mvc.entity;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
  * Article entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "article")
+@Table(name = "article", catalog = "mvcdb")
 public class Article implements java.io.Serializable {
 
 	// Fields
 
 	private Integer id;
-	private Integer userid;
-	private Integer typeid;
+	private Articletype articletype;
+	private Tuser tuser;
 	private String keyword;
 	private String title;
 	private String content;
-	private String summary;
 	private Integer createtime;
 	private Integer publictime;
 	private Integer status;
 	private Integer praisecount;
+	private String summary;
 
 	// Constructors
 
@@ -36,35 +36,36 @@ public class Article implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Article(Integer id, Integer userid, Integer typeid, String title,
-			String content) {
+	public Article(Integer id, Articletype articletype, Tuser tuser,
+			String title, String content, String summary) {
 		this.id = id;
-		this.userid = userid;
-		this.typeid = typeid;
-		this.title = title;
-		this.content = content;
-	}
-
-	/** full constructor */
-	public Article(Integer id, Integer userid, Integer typeid, String keyword,
-			String title, String content,String summary, Integer createtime,
-			Integer publictime, Integer status, Integer praisecount) {
-		this.id = id;
-		this.userid = userid;
-		this.typeid = typeid;
-		this.keyword = keyword;
+		this.articletype = articletype;
+		this.tuser = tuser;
 		this.title = title;
 		this.content = content;
 		this.summary = summary;
+	}
+
+	/** full constructor */
+	public Article(Integer id, Articletype articletype, Tuser tuser,
+			String keyword, String title, String content, Integer createtime,
+			Integer publictime, Integer status, Integer praisecount,
+			String summary) {
+		this.id = id;
+		this.articletype = articletype;
+		this.tuser = tuser;
+		this.keyword = keyword;
+		this.title = title;
+		this.content = content;
 		this.createtime = createtime;
 		this.publictime = publictime;
 		this.status = status;
 		this.praisecount = praisecount;
+		this.summary = summary;
 	}
 
 	// Property accessors
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
@@ -74,22 +75,24 @@ public class Article implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "userid", nullable = false)
-	public Integer getUserid() {
-		return this.userid;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "typeid", nullable = false)
+	public Articletype getArticletype() {
+		return this.articletype;
 	}
 
-	public void setUserid(Integer userid) {
-		this.userid = userid;
+	public void setArticletype(Articletype articletype) {
+		this.articletype = articletype;
 	}
 
-	@Column(name = "typeid", nullable = false)
-	public Integer getTypeid() {
-		return this.typeid;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userid", nullable = false)
+	public Tuser getTuser() {
+		return this.tuser;
 	}
 
-	public void setTypeid(Integer typeid) {
-		this.typeid = typeid;
+	public void setTuser(Tuser tuser) {
+		this.tuser = tuser;
 	}
 
 	@Column(name = "keyword", length = 20)
@@ -117,15 +120,6 @@ public class Article implements java.io.Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-	
-	@Column(name = "summary", nullable = false, length = 100)
-	public String getSummary() {
-		return this.summary;
-	}
-
-	public void setSummary(String summary) {
-		this.summary = summary;
 	}
 
 	@Column(name = "createtime")
@@ -162,6 +156,15 @@ public class Article implements java.io.Serializable {
 
 	public void setPraisecount(Integer praisecount) {
 		this.praisecount = praisecount;
+	}
+
+	@Column(name = "summary", nullable = false, length = 100)
+	public String getSummary() {
+		return this.summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
 }

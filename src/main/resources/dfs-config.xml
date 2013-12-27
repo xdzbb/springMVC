@@ -13,8 +13,18 @@ http://www.springframework.org/schema/aop
 http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
   http://www.springframework.org/schema/context   
    http://www.springframework.org/schema/context/spring-context-3.1.xsd
-">		
-	<import resource="classpath*:hib-config.xml"/>
-	<import resource="classpath*:interceptor-config.xml"/>	
-	<import resource="classpath*:dfs-config.xml"/>
+">	
+	<bean id="trackerClient" class="org.csource.fastdfs.TrackerClient">
+		<constructor-arg index="0" ref="trackerGroup"/>
+	</bean>
+	<bean id="trackerGroup" class="org.csource.fastdfs.TrackerGroup">
+		<constructor-arg index="0" ref="socketAddress"/>
+	</bean>
+	<bean id="socketAddress" class="java.net.InetSocketAddress">
+		<constructor-arg index="0" value="192.168.1.200"/>
+		<constructor-arg index="1" value="22122"/>
+	</bean>
+	<bean id="dfsTracker" class="com.mvc.util.DFSTracker">
+		<property name="trackerClient" ref="trackerClient"/>
+	</bean>	
 </beans>

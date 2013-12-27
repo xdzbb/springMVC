@@ -1,8 +1,11 @@
 package com.mvc.util;
 
 import java.io.*;
+
+
 import java.text.SimpleDateFormat;
 import java.util.*;
+
 import org.apache.commons.fileupload.*;
 import org.apache.commons.fileupload.FileUploadBase.InvalidContentTypeException;
 import org.apache.commons.fileupload.FileUploadBase.SizeLimitExceededException;
@@ -10,15 +13,21 @@ import org.apache.commons.fileupload.util.*;
 import org.apache.commons.fileupload.servlet.*;
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-
+import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import sun.misc.BASE64Decoder;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 /**
  * UEditor文件上传辅助类
  *
  */
-public class Uploader {
+
+public class Uploader {	
+	private DFSTracker dfsTracker;
 	// 输出文件地址
 	private String url = "";
 	// 上传文件名
@@ -44,8 +53,12 @@ public class Uploader {
 	
 	private HashMap<String, String> errorInfo = new HashMap<String, String>();
 
-	public Uploader(HttpServletRequest request) {
+	public Uploader(){
+		
+	}
+	public Uploader(HttpServletRequest request,DFSTracker dfsTracker) {
 		this.request = request;
+		this.dfsTracker = dfsTracker;
 		HashMap<String, String> tmp = this.errorInfo;
 		tmp.put("SUCCESS", "SUCCESS"); //默认成功
 		tmp.put("NOFILE", "未包含文件上传域");
@@ -57,8 +70,7 @@ public class Uploader {
 		tmp.put("DIR", "目录创建失败");
 		tmp.put("UNKNOWN", "未知错误");
 	
-	}
-
+	}	
 	public void upload() throws Exception {
 		boolean isMultipart = ServletFileUpload.isMultipartContent(this.request);
 		if (!isMultipart) {
@@ -66,12 +78,12 @@ public class Uploader {
 			return;
 		}
 		DiskFileItemFactory dff = new DiskFileItemFactory();
-		String savePath = this.getFolder(this.savePath);
+		String savePath = this.getFolder(this.savePath);		
 		dff.setRepository(new File(savePath));
 		try {
 			ServletFileUpload sfu = new ServletFileUpload(dff);
 			sfu.setSizeMax(this.maxSize * 1024);
-			sfu.setHeaderEncoding("utf-8");
+			sfu.setHeaderEncoding("utf-8");		
 			FileItemIterator fii = sfu.getItemIterator(this.request);
 			while (fii.hasNext()) {
 				FileItemStream fis = fii.next();
@@ -105,7 +117,6 @@ public class Uploader {
                     }
                     this.title = new String(result.toString().getBytes(),"utf-8");
                     reader.close();  
-                    
 				}
 			}
 		} catch (SizeLimitExceededException e) {
@@ -122,7 +133,28 @@ public class Uploader {
 			this.state = this.errorInfo.get("UNKNOWN");
 		}
 	}
-	
+	public void springUpload(CommonsMultipartFile file)throws Exception{
+		try {
+			if (!file.isEmpty()) {				 
+				 this.fileName = file.getOriginalFilename();
+				 if (!this.checkFileType(this.originalName)) {
+						this.state = this.errorInfo.get("TYPE");						
+				 }
+				 this.title = request.getParameter("pictitle");
+				 String fileType = fileName.substring(fileName.lastIndexOf("."));
+				 this.url = dfsTracker.upload(file.getFileItem());
+				 this.originalName = file.getOriginalFilename();
+				 System.out.println(url);
+				 this.state=this.errorInfo.get("SUCCESS");
+			}else{
+				this.state = this.errorInfo.get("UNKNOWN");
+			}  	
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.state = this.errorInfo.get("UNKNOWN");
+		}
+		
+	}
 	/**
 	 * 接受并保存以base64格式上传的文件
 	 * @param fieldName

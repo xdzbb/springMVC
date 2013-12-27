@@ -13,7 +13,7 @@ CREATE TABLE `tuser` (
   `jointime` int DEFAULT NULL comment '批准加入时间',
   `status` int(11) DEFAULT NULL comment '用户状态:0,代表正常 1，代表封禁',
   PRIMARY KEY (`id`)
-)  ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8
+)  engine=innodb AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8
 
 
 CREATE TABLE `article` (
@@ -22,30 +22,38 @@ CREATE TABLE `article` (
   `typeid` int(11) not null COMMENT '文章分类表',
   `keyword` varchar(20) NULL COMMENT '文章关键词',
   `title` varchar(256) not NULL COMMENT '文章标题',
-  `summary` varchar(100) comment '文章摘要',
   `content` text not NULL COMMENT '文章内容',
   `createtime` int  null COMMENT '文章发布时间',
   `publictime` int  null comment '通过时间',
   `status` int(11) DEFAULT NULL comment '0,代表通过 1，代表拒绝',
   `praisecount` int(11) default null comment '点赞数',
-   PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`),
    FOREIGN KEY (`userid`) REFERENCES `tuser`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (`typeid`) REFERENCES `articletype`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
    
-)  ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+)  engine=innodb AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
 
 
 CREATE TABLE `articletype` (
   `id` int(11) AUTO_INCREMENT COMMENT 'ID', 
   `typename` varchar(256) not null COMMENT '文章类型名',
   PRIMARY KEY (`id`)
-)  ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+)  engine=innodb AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
 
-insert into `articletype`(`typename`) values('诗歌日记');
-insert into `articletype`(`typename`) values('诗歌日记');
-insert into `articletype`(`typename`) values('诗歌日记');
+insert into `articletype`(`typename`) values('经典文章');
+insert into `articletype`(`typename`) values('情感文章');
+insert into `articletype`(`typename`) values('原创文章');
+insert into `articletype`(`typename`) values('伤感文章');
+insert into `articletype`(`typename`) values('心情文章');
+insert into `articletype`(`typename`) values('励志文章');
+insert into `articletype`(`typename`) values('人生哲理');
+insert into `articletype`(`typename`) values('爱情文章');
+insert into `articletype`(`typename`) values('搞笑文章');
+insert into `articletype`(`typename`) values('非主流文章');
+insert into `articletype`(`typename`) values('亲情文章');
 
-select * from articletype;
+select * from tuser;
+TRUNCATE TABLE tuser;
 
 create table `comment` (
   `id`  int(11) AUTO_INCREMENT COMMENT 'ID', 
@@ -56,7 +64,7 @@ create table `comment` (
   `time` int  null COMMENT '评论时间',
   PRIMARY KEY (`id`),
   FOREIGN KEY (`userid`) REFERENCES `tuser`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
-)  ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+)  engine=innodb AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
 </sql>
 
 

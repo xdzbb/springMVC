@@ -168,7 +168,7 @@
 		</script>         
          <p class="cellBg">
          <label>验证码：</label>
-         <input name="vdcode" type="text" id="vdcode" maxlength="100" class="intxt" style="width:50px;">
+         <input name="vdcode" type="text" id="vdcode" alt="请输入验证码" minlength="1" maxlength="100" class="intxt" style="width:50px;">
         	<img src="ValidateCode.do?t=<%=new Date().getTime()%>" alt="看不清？点击更换" align="absmiddle" style="cursor:pointer"  onclick="javascript:this.src='ValidateCode.do?'+ Math.random()" />
          </p>
         <p>

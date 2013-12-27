@@ -16,6 +16,8 @@ import javax.persistence.Table;
 @Table(name = "tuser")
 public class Tuser implements java.io.Serializable {
 
+	public final static int NormalStatus=0;//代表用户正常
+	public final static int BannedStatus=1;//代表用户被封禁
 	// Fields
 
 	private Integer id;

@@ -2,46 +2,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <link type="text/css" rel="stylesheet" href="resource/css/login.css">
 <jsp:include page="/WEB-INF/jsp/header.jsp" />
-<script language="javascript" type="text/javascript">
-	var reMethod = "GET", pwdmin = 3;
-	function changeAuthCode() {
-		var num = new Date().getTime();
-		var rand = Math.round(Math.random() * 10000);
-		num = num + rand;
-		$('#ver_code').css('visibility', 'visible');
-		if ($("#vdimgck")[0]) {
-			$("#vdimgck")[0].src = "../include/vdimgck.php?tag=" + num;
-		}
-		return false;
-	}
-	function hideVc() {
-		$('#ver_code').css('visibility', 'hidden');
-	}
-	$(document).ready(function() {
-		$("#passwordLevel").removeClass().addClass("rank r0");
-		$("#vdcode").focus(function() {
-			var leftpos = $("#vdcode").position().left;
-			var toppos = $("#vdcode").position().top - 42;
-			$('#ver_code').css('left', leftpos + 'px');
-			$('#ver_code').css('top', toppos + 'px');
-			$('#ver_code').css('visibility', 'visible');
-		});
-		$("input[type='password']").click(function() {
-			hideVc()
-		});
-		$("#txtUsername").click(function() {
-			hideVc()
-		});
-		$("input[type='radio']").focus(function() {
-			hideVc()
-		});
-		/*
-		 $("#vdcode").blur(function(){
-		 $('#ver_code').css('visibility','hidden');
-		 });
-		 */
-	})	
-</script>
 <body>
 	<div class="header">
 		<div class="auto960">
@@ -102,14 +62,13 @@
 						class="intxt w200" type="text" name="nickname" size="20"
 						alt="请输入笔名" minlength="1" maxlength="100"> <i class="red">*</i>
 						<em id="_uname"> </em></li>
-					<em id="_uname">
-						<script type="text/javascript">
-							function checkPwd() {
-								if($("#password").val()==$("#newpassword").val()){
-									alert(1);
-								}
+					<em id="_uname"> <script type="text/javascript">
+						function checkPwd() {
+							if ($("#password").val() == $("#newpassword").val()) {
+								alert(1);
 							}
-						</script>
+						}
+					</script>
 						<li><span>登陆密码：</span> <input id="password"
 							class="intxt w200" type="password" name="password"
 							style="font-family: verdana;" alt="请输入密码" minlength="1"
@@ -135,13 +94,11 @@
 							type="text" name="tel" alt="请输入电话号码" minlength="1"
 							maxlength="100"> <i class="red">*</i> <em id="tel">(请填写真实的手机号码)</em>
 					</li>
-						<li><span>验证码：</span> <input id="vdcode" class="intxt w200"
-							type="text" name="vdcode" alt="验证码" minlength="1" maxlength="100"
-							style="width: 50px; text-transform: uppercase;"> <img
-							id="vdimgck" align="absmiddle" src="resource/images/vdimgck.png"
-							alt="看不清？点击更换" style="cursor: pointer;"
-							onclick="this.src=this.src+'?'"> 看不清？ <a
-							onclick="changeAuthCode();" href="javascript:void(0)">点击更换</a></li>
+						<li><span>验证码：</span> <input name="vdcode" type="text"
+							id="vdcode" alt="请输入验证码" minlength="1" maxlength="100" class="intxt" style="width:50px;">
+							<img src="ValidateCode.do?t=<%=new Date().getTime()%>"
+							alt="看不清？点击更换" align="absmiddle" style="cursor:pointer"
+							onclick="javascript:this.src='ValidateCode.do?'+ Math.random()" /></li>
 					</em>
 				</ul>
 				<em id="_uname">

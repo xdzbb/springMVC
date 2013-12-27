@@ -26,7 +26,7 @@
 网络地址错误。
 </c:if>
 <c:if test="${!empty message}">
-${message}.
+${message}
 </c:if>
     </dd>
 	<dd>你可以<a href="javascript:void(0);" onclick="history.back();return false;">返回</a>之前的页面，或者关闭此窗口</dd>

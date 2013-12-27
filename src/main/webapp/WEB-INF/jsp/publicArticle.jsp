@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <jsp:include page="/WEB-INF/jsp/header.jsp" />
+<link href="resource/css/base.css" rel="stylesheet" type="text/css">
 <script  type="text/javascript" src="resource/ueditor-1.2.5/editor_all_min.js"></script>
 <script  type="text/javascript" src="resource/ueditor-1.2.5/editor_config.js"></script>
 <body>

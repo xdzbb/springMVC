@@ -207,10 +207,11 @@
           <target>1.6</target>
            <encoding>UTF-8</encoding>
            <compilerArguments>
-             <extdirs>src\main\webapp\WEB-INF\lib</extdirs>
+             <extdirs>src/main/webapp/WEB-INF/lib</extdirs>
            </compilerArguments>
         </configuration>
       </plugin>
+      <!--Begin Name:zbb Date:2013-11-24 AddReason:该插件用来打成war包 使用方式mvn war:war -->			
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>${maven.war.version}</version>
@@ -219,6 +220,42 @@
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
+      <!--End Name:zbb Date:2013-11-24 AddReason:该插件用来打成war包 使用方式mvn war:war -->
+      <plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.1.3</version>
+				<configuration>
+					<container>
+					<containerId>tomcat6x</containerId>
+						<type>remote</type>
+					</container>
+					<configuration>
+						<type>runtime</type>
+						<properties>
+							<cargo.remote.username>manager</cargo.remote.username>
+							<cargo.remote.password>manager</cargo.remote.password>
+							<cargo.tomcat.manager.url>http://localhost:8080/manager</cargo.tomcat.manager.url>
+						</properties>
+					</configuration>
+					<deployer>
+						<type>installed</type>   
+						<deployables>
+							<deployable>
+								<groupId>com.mvc</groupId>
+								<artifactId>springMVC</artifactId>
+								<type>war</type>
+								<properties>
+									<!-- deployer是部署时的相关配置，这个context是用来声明工程部署后的上下文，也就是 主机地址后面的一级目录位置。这个设置在maven构建中还是很必要的。因为maven默认打出 
+										的war包是工程名+版本号，部署时如果不设置这里的context，那上下文就变成了工程名+版本号 的形式。这会使访问变得很不方便。注意，即使你通过修改war插件中的warName也是不能达到这个 
+										目的，因为cargo认定的默认war包名就是工程名+版本号的形式。部署至tomcat下就会自动解压成ROOT -->
+									<context>springMVC</context>
+								</properties>
+							</deployable>
+						</deployables>
+					</deployer>
+				</configuration>
+		</plugin>
     </plugins>
   </build>
 </project>

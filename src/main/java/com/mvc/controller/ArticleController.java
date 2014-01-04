@@ -35,8 +35,7 @@ public class ArticleController {
 			ModelAndView modelAndView, SessionStatus status) {
 		List<Articletype> typelist = (List<Articletype>) articleTypeService
 				.getArticleTypeList();
-		map.addAttribute("typelist", typelist);
-		map.put("a", "assss");		
+		map.addAttribute("typelist", typelist);		
 		return "publicArticle";
 	}
 

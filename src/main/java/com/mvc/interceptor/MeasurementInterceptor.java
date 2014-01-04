@@ -30,8 +30,7 @@ public class MeasurementInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request,HttpServletResponse response,  
         Object handler,ModelAndView modelAndView)throws Exception{
     	boolean isexclude = false;
-    	String requestUri = request.getRequestURI();
-    	System.out.println(requestUri);
+    	String requestUri = request.getRequestURI();    	
     	for(String url : excludedUrls) {  
     	      if (requestUri.endsWith(url)) {  
     	    	  isexclude = true;

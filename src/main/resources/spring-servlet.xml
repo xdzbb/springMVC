@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cache="http://www.springframework.org/schema/cache"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
@@ -14,6 +15,8 @@
        http://www.springframework.org/schema/context/spring-context-3.1.xsd
         http://www.springframework.org/schema/mvc 
        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+       http://www.springframework.org/schema/cache 
+	   http://www.springframework.org/schema/cache/spring-cache.xsd       
        ">
 
 	<import resource="classpath*:common-config.xml" />
@@ -37,12 +40,26 @@
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
 	</bean>
+	<!--  注解实现ehcache -->	
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
+        <property name="configLocation">    
+            <value>classpath:ehcache.xml</value>    
+        </property>   
+    </bean>  
+    <bean id="ehCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">     
+      <property name="cacheManager">     
+        <ref local="cacheManager"/>     
+      </property>     
+      <property name="cacheName">     
+          <value>userCache</value>     
+      </property>     
+    </bean>    
 	<!-- 处理文件上传 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8" /><!-- 默认编码UTF-8 -->
 		<property name="maxUploadSize" value="104857600" />
 		<property name="maxInMemorySize" value="4096" />		
-		<property name="uploadTempDir" value="/upload/" /><!-- 上传后的目录名-->		
+		<property name="uploadTempDir" value="/" /><!-- 上传后的目录名-->		
 	</bean>	
 </beans>  

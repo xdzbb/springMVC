@@ -126,7 +126,7 @@
       <form name="addcontent" action="article_publicArticle.do" method="post" onsubmit="return checkform();">
          <div id="mainCp">
 	        <h3 class="meTitle"><strong>发表普通文章</strong></h3>
-	        ${sessionScope.a}
+	        <%=new Date()%>
 	        <div class="postForm">
 	          <c:if test="${!empty error }">
 	          <p class="cellBg">	          

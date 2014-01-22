@@ -73,6 +73,23 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<filter>
+    <filter-name>PageEhCacheFilter</filter-name>
+    <filter-class>com.mvc.filter.PageEhCacheFilter</filter-class>
+    <init-param>
+        <param-name>patterns</param-name>
+        <!-- 配置你需要缓存的url -->
+        <param-value>publicArticle.jsp,article_publicArticle.do</param-value>
+    </init-param>
+    </filter>
+	<filter-mapping>
+	    <filter-name>PageEhCacheFilter</filter-name>
+	    <url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+	    <filter-name>PageEhCacheFilter</filter-name>
+	    <url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
 	 <servlet-mapping>  
     <servlet-name>default</servlet-name>  
     <url-pattern>*.html;*.css;*.js;*.swf;*.gif;*.jpg;*.png</url-pattern>  
